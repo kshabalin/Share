@@ -4,8 +4,9 @@ TODO - Share More - UI mockup
 ● Top
 > List friends & shares (Pulse style)
 
-http://www.netmagazine.com/tutorials/build-mobile-template-handlebars
+- add model for Share's
 
+http://stackoverflow.com/questions/8887440/implementing-a-composite-pattern-using-mvc-backbone-js
 
 > Sort
 -- store sort state...
@@ -59,6 +60,8 @@ http://blog.codiqa.com/2012/06/the-making-of-a-jquery-mobile-widget-the-tab-bar/
 	    */
 
 > List friends & shares (Pulse style)
+http://www.netmagazine.com/tutorials/build-mobile-template-handlebars
+
 Go through the Backbone View tutorial and get it working...
 http://documentcloud.github.com/backbone/docs/todos.html
 
