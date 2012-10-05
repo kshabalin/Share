@@ -205,3 +205,15 @@
 	/*font-family: Helvetica, Arial, sans-serif /*{global-font-family}*/;
 	text-decoration: none;
 }
+
+
+
+/* Things related to our List of friends...*/
+.FriendName {
+	position: fixed;
+	left: 0px;
+	width: 10%;
+}
+.SharePhoto {
+	height: 40px;
+}

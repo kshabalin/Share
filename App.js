@@ -71,13 +71,12 @@ function randomShares() {
 	for(; count-->0;){
 		shares.push(new App.Share({
 			date: new Date(),
-			photo: 	'samples/things/img-006.jpeg',
+			photo: 	'samples/things/img-00'+(Math.round(1+Math.random()*5))+'.jpeg',
 			info: "Foobar",
 			type: 'money',
 			amount: 99
 		}));
 	}	
-	console.log(shares);
 	return shares;
 }
 App.Friends.add([
@@ -93,6 +92,7 @@ App.Friends.add([
 $( document ).delegate("#TopPage", "pageinit", function() {
 	App.FriendListItemView = Backbone.View.extend({
 		template:  _.template($('#item-template').html()),
+		shareTemplate:  _.template($('#item-template-share').html()),
 		tagName:  "li",
 	    initialize: function(){
 	    },
@@ -100,12 +100,14 @@ $( document ).delegate("#TopPage", "pageinit", function() {
 	    	var htmlT = this.template(this.model.toJSON());
 	        this.$el.html(htmlT);
 
-	        console.log(this.model.get("shares"));
-	    	var theelem = this.$el;
-	    	_.each(this.model.get("shares"), function(share){
-		    	console.log(share);
-		        theelem.append(share.get("info")); 		
-	    	})
+	        var self = this;
+	    	var theelem = this.$el.find(".FriendShare");
+	    	_.each(
+	    		this.model.get("shares"), 
+	    		function(share){
+			        theelem.append(self.shareTemplate(share.toJSON())); 		
+			    }
+			);
 	        return this;
 	    }
 	});

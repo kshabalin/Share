@@ -28,7 +28,10 @@
         <!-- The Top Page  --> 
         
 <script id="item-template" type="text/template">
-<a href="#"><img src="{{photo}}"/>{{name}}</a>
+	<a href="#"><img class="FriendPhoto" src="{{photo}}"/><div class="FriendName">{{name}}</div><div class="FriendShare"></div></a>
+</script>
+<script id="item-template-share" type="text/template">
+	<img class="SharePhoto" src="{{photo}}"/>
 </script>
 <script type="text/javascript"></script>
         <section id="TopPage" data-role="page" data-theme="s">
