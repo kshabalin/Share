@@ -1,0 +1,66 @@
+TODO - Share More - UI mockup
+
+
+● Top
+> List friends & shares (Pulse style)
+
+http://www.netmagazine.com/tutorials/build-mobile-template-handlebars
+
+
+> Sort
+-- store sort state...
+-- make button reflect the mutually exlusive selection
+
+
+● Share! pop-up dialog
+- add date scroller
+http://mobiscroll.com/
+
+● Existing share pop-up
+--> Confirm (if unconfirmed)
+
+
+● Person view page
+Set up JQuery mobile router:
+https://github.com/azicchetti/jquerymobile-router#readme
+
+Dynamically create page
+http://stackoverflow.com/questions/12591473/best-way-to-dynamically-create-new-pages-in-jquery-mobile-from-ajaxjson-data
+
+
+● Top
+> Filter Money, Time, Things, Promises
+
+
+_________________________  DONE  __________________________
+● Top > Sort
+-- add Sort button to top header
+-- add pop-up with button  "Name", "Recent", "Shuffle"
+-- add icons for button and sub-selections...
+
+● Change font...
+
+◎ Set-up preview on server
+
+● Share! pop-up dialog
+- from
+- tabs to select what to input
+http://jsfiddle.net/E86M9/3/
+
+http://blog.codiqa.com/2012/06/the-making-of-a-jquery-mobile-widget-the-tab-bar/
+-- switch panel on tabs
+
+	    /*    Using non-inline template
+	    http://stackoverflow.com/questions/8366733/external-template-in-underscore
+	     textTemplate: _.template( $('#practice-text-template').html() ),
+	    */
+	    /* Use underscore templates:
+	    	http://documentcloud.github.com/underscore/#template
+	    */
+
+> List friends & shares (Pulse style)
+Go through the Backbone View tutorial and get it working...
+http://documentcloud.github.com/backbone/docs/todos.html
+
+COnvert to proper Convention for namespaces
+http://ricostacruz.com/backbone-patterns/#namespace_convention

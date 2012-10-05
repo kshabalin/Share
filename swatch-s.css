@@ -1,0 +1,207 @@
+/*
+* A Swatch for ShareMore mobile application...
+*/
+
+.ui-icon-vi-sort-name {
+	background-image: url("images/112-group.png");
+}
+.ui-icon-vi-sort-recent {
+	background-image: url("images/11-clock.png");
+}
+.ui-icon-vi-sort-shuffle {
+	background-image: url("images/05-shuffle.png");
+}
+
+.ui-listview li.ui-btn {
+	background: transparent;
+}
+
+.android-ics, .android-ics.light .dw {
+	background: transparent;
+	border: 0px;
+}
+
+#SharePopUp-screen {
+	background-color: black;
+}
+
+#SharePopUp .ui-content{
+	padding: 0px;
+		width: 100%;
+
+}
+/* The select button on the main page */
+#vi-sort-select {
+	margin: 0px;
+}
+
+#vi-sort-select .ui_btn {
+	-moz-border-radius: 				0px /*{global-radii-buttons}*/;
+	-webkit-border-radius: 				0px /*{global-radii-buttons}*/;
+	border-radius: 						0px /*{global-radii-buttons}*/;
+
+}
+#vi-share-button {
+	margin: 0 auto;
+	background-image: url("images/petals.jpeg");
+	background-position: 40px 40px;
+}
+.ui-body-s, .ui-body-s .ui-btn-text, .android-ics.light .dw  {
+	font-family: 'Rock Salt', cursive;
+	font-size: 11pt;
+}
+
+.vi-user-photo-large {
+	height: 40pt;
+}
+.ui-body-s .ui-header .ui-title, .ui-body-s .ui-footer .ui-title { 
+	text-align: center; 
+	font-size: 1.5em;
+	margin: 2px;
+}
+
+
+.ui-body-s .ui-title, .ui-body-s .ui-footer {
+		background-image: url(images/Grungy.jpeg);
+}
+
+.ui-btn-inner { 
+	/*font-size: 13px; */
+	padding: .2em 20px; min-width: .55em; 	
+}
+
+.ui-bar-s {
+	border: 1px solid 		#b3b3b3 /*{c-bar-border}*/;
+	color: 					#3e3e3e /*{c-bar-solor}*/;
+	/*font-weight: bold;*/
+	text-shadow: 0 /*{c-bar-shadow-x}*/ 1px /*{c-bar-shadow-y}*/ 1px /*{c-bar-shadow-radius}*/ 	#fff /*{c-bar-shadow-solor}*/;
+
+}
+.ui-bar-s .ui-link-inherit {
+	color: 	#3e3e3e /*{c-bar-solor}*/;
+}
+.ui-bar-s a.ui-link {
+	color: #7cc4e7 /*{c-bar-link-solor}*/;
+	/*font-weight: bold;*/
+}
+.ui-bar-s a.ui-link:visited {
+    color: #2489ce /*{c-bar-link-visited}*/;
+}
+.ui-bar-s a.ui-link:hover {
+	color: #2489ce /*{c-bar-link-hover}*/;
+}
+.ui-bar-s a.ui-link:active {
+	color: #2489ce /*{c-bar-link-active}*/;
+}
+.ui-bar-s,
+.ui-bar-s input,
+.ui-bar-s select,
+.ui-bar-s textarea,
+.ui-bar-s button {
+	/*font-family: Helvetica, Arial, sans-serif /*{global-font-family}*/;
+}
+.ui-body-s,
+.ui-overlay-s {
+	border: 1px solid 		#aaa /*{c-body-border}*/;
+	color: 					#333 /*{c-body-solor}*/;
+	text-shadow: 0 /*{c-body-shadow-x}*/ 1px /*{c-body-shadow-y}*/ 0 /*{c-body-shadow-radius}*/ #fff /*{c-body-shadow-solor}*/;
+	background: 			#f9f9f9 /*{c-body-background-solor}*/;
+	background-image: url(images/petals.jpeg);
+}
+.ui-overlay-s {
+	background-image: none;
+	border-width: 0;
+}
+.ui-body-s,
+.ui-body-s input,
+.ui-body-s select,
+.ui-body-s textarea,
+.ui-body-s button {
+	/*font-family: Helvetica, Arial, sans-serif /*{global-font-family}*/;
+}
+.ui-body-s .ui-link-inherit {
+	color: 	#333 /*{c-body-solor}*/;
+}
+.ui-body-s .ui-link {
+	color: #2489ce /*{c-body-link-solor}*/;
+	/*font-weight: bold;*/
+}
+.ui-body-s .ui-link:visited {
+    color: #2489ce /*{c-body-link-visited}*/;
+}
+.ui-body-s .ui-link:hover {
+	color: #2489ce /*{c-body-link-hover}*/;
+}
+.ui-body-s .ui-link:active {
+	color: #2489ce /*{c-body-link-active}*/;
+}
+
+.ui-shadow, .ui-overlay-shadow {
+	-webkit-box-shadow: 3px 3px 0px rgba(50, 50, 50, 0.39);
+	-moz-box-shadow:    3px 3px 0px rgba(50, 50, 50, 0.39);
+	box-shadow:         3px 3px 0px rgba(50, 50, 50, 0.39);
+}
+
+.ui-btn-corner-all, .ui-corner-all {
+	-moz-border-radius: 				2px /*{global-radii-buttons}*/;
+	-webkit-border-radius: 				2px /*{global-radii-buttons}*/;
+	border-radius: 						2px /*{global-radii-buttons}*/;
+}
+
+.ui-btn-up-s, .ui-btn-hover-s, .ui-btn-down-s {
+	background: 			#eee /*{c-bup-background-solor}*/;
+		background-image: url(images/Grungy.jpeg);
+		background-position: -40px -20px;
+	/*font-weight: bold;*/
+	color: 					#222 /*{c-bup-solor}*/;
+	text-shadow: 0 /*{c-bup-shadow-x}*/ 1px /*{c-bup-shadow-y}*/ 0 /*{c-bup-shadow-radius}*/ #fff /*{c-bup-shadow-solor}*/;
+}
+
+/*
+.ui-btn-hover-s, .ui-btn-down-s  {
+	-moz-box-shadow:inset 0px 0px 3px 3px #35ed4d;
+	-webkit-box-shadow:inset 0px 0px 3px 3px #35ed4d;
+	box-shadow:inset 0px 0px 3px 3px #35ed4d;
+}
+
+.ui-btn-down-s {
+	-moz-box-shadow:inset 0px 0px 3px 3px #222;
+	-webkit-box-shadow:inset 0px 0px 3px 3px #222;
+	box-shadow:inset 0px 0px 3px 3px #222;
+}*/
+
+.ui-btn-up-s {
+	border: 1px solid 		#ccc /*{c-bup-border}*/;
+}
+.ui-btn-up-s:visited,
+.ui-btn-up-s a.ui-link-inherit {
+	color: 					#2f3e46 /*{c-bup-solor}*/;
+}
+.ui-btn-hover-s {
+	border: 1px solid 		#bbb /*{c-bhover-border}*/;
+	/*font-weight: bold;*/
+}
+.ui-btn-hover-s:visited,
+.ui-btn-hover-s:hover,
+.ui-btn-hover-s a.ui-link-inherit {
+	color: 					#2f3e46 /*{c-bhover-solor}*/;
+}
+.ui-btn-down-s {
+	border: 1px solid 		#bbb /*{c-bdown-border}*/;
+	background: 			#d6d6d6 /*{c-bdown-background-solor}*/;
+	/*font-weight: bold;*/
+	color: 					#222 /*{c-bdown-solor}*/;
+	text-shadow: 0 /*{c-bdown-shadow-x}*/ 1px /*{c-bdown-shadow-y}*/ 0 /*{c-bdown-shadow-radius}*/ #fff /*{c-bdown-shadow-solor}*/;
+
+}
+.ui-btn-down-s:visited,
+.ui-btn-down-s:hover,
+.ui-btn-down-s a.ui-link-inherit {
+	color: 					#2f3e46 /*{c-bdown-solor}*/;
+}
+.ui-btn-up-s,
+.ui-btn-hover-s,
+.ui-btn-down-s {
+	/*font-family: Helvetica, Arial, sans-serif /*{global-font-family}*/;
+	text-decoration: none;
+}

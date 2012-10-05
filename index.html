@@ -1,0 +1,264 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>Share!</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scaleable=no">
+ 
+        <link href='http://fonts.googleapis.com/css?family=Rock+Salt' rel='stylesheet' type='text/css'>
+
+        <link rel="stylesheet" href="lib/jquery.mobile-1.2.0-rc.2.css" />
+        <script src="lib/jquery-1.8.1.min.js"></script>
+        <script src="lib/jquery.mobile-1.2.0-rc.2.js"></script>
+
+
+		<!-- <link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0-rc.2/jquery.mobile-1.2.0-rc.2.min.css" />
+		<script src="http://code.jquery.com/jquery-1.8.1.min.js"></script>
+		<script src="http://code.jquery.com/mobile/1.2.0-rc.2/jquery.mobile-1.2.0-rc.2.min.js"></script>
+		-->
+		
+		<!-- scroller widget for date & etc. selection... http://mobiscroll.com/  -->
+		<script src="lib/mobiscroll-2.0.3.custom.min.js"></script>
+		
+		<link rel="stylesheet" href="lib/mobiscroll-2.0.3.custom.min.css" />
+
+		<script src="lib/mobiscroll.android-ics-2.0.js" type="text/javascript"></script>
+		<link href="lib/mobiscroll.android-ics-2.0.css" rel="stylesheet" type="text/css" />		
+		<script src="lib/underscore.js"></script>
+		<script src="lib/backbone.js"></script>
+
+	    <script>
+	    	/* The tabs of share select dialog.*/
+	        var prevSelection = "tab1";
+	        $("#ShareTypeTab ul li").live("click",function(){
+	            var newSelection = $(this).children("a").attr("data-tab-class");
+	            $("."+prevSelection).addClass("ui-screen-hidden");
+	            $("."+newSelection).removeClass("ui-screen-hidden");
+	            prevSelection = newSelection;
+	        });
+	    </script>
+
+        <link rel="stylesheet" href="swatch-s.css" />
+
+    </head>
+    <body>
+        <!-- The Top Page  --> 
+        
+<script id="item-template" type="text/template">
+<a href="#"><img src="{{photo}}"/>{{name}}</a>
+</script>
+<script type="text/javascript">
+	// Set-up the namespace we put everything into...
+	// From: http://ricostacruz.com/backbone-patterns/#namespace_convention
+	var App = window.App = {};
+	
+	/* Set to moustache style template format, 
+		NOTE!!! will not work for looping...
+	http://stackoverflow.com/questions/9002203/backbone-underscore-template-in-mustache-format-causing-error-on-pound-hash-sy
+	*/
+	_.templateSettings = {
+	     evaluate : /\{\[([\s\S]+?)\]\}/g,
+	     interpolate : /\{\{([\s\S]+?)\}\}/g
+	};
+
+	$(document).bind( "mobileinit", function(event) {
+	    $.extend($.mobile.zoom, {locked:true,enabled:false});
+	    $('#SharePopUp').popup({ tolerance: "2" });
+	});
+	
+	$(document).bind( "pagebeforeshow", function(event) {
+	    $('#SharePopUp').popup({ tolerance: "0" });
+	});
+
+	/*
+	 General structure based on:
+	 http://documentcloud.github.com/backbone/docs/todos.html
+	 */
+	App.Friend = Backbone.Model.extend({
+         defaults: {
+            name: 'John Doe',
+            photo: 'samples/person/img-006.jpeg',
+        },
+        initialize: function(){
+        }
+    });
+    
+	
+	var FriendsList =  Backbone.Collection.extend({
+	        model: App.Friend
+	});
+	App.Friends = new FriendsList;
+	
+    App.FriendListItemView = Backbone.View.extend({
+    	template:  _.template($('#item-template').html()),
+    	tagName:  "li",
+        initialize: function(){
+        },
+        render: function(){
+        	var htmlT = this.template(this.model.toJSON());
+            this.$el.html(htmlT);
+            //.trigger('create');
+            //$("#friendlist").append(htmlT);
+            
+            // Tell jQuery Mobile to annotate the list item so it looks right...
+            //$("#friendlist").listview('refresh');
+            return this;
+        }
+    });
+
+	  App.Friends.add([
+	    	{ name: "Bob Smith", photo: 'samples/person/img-001.jpeg'},
+	    	{ name: "Foo Barer", photo: 'samples/person/img-002.jpeg'},
+	    	{ name: "Hello Worlder", photo: 'samples/person/img-003.jpeg'},
+	    	{ name: "Hello Wzxcsdf orlder", photo: 'samples/person/img-004.jpeg'},
+	    	{ name: "Foo asdsdf", photo: 'samples/person/img-005.jpeg'},
+	    	{ name: "Monetary Ecology", photo: 'samples/person/img-006.jpeg'},
+	    	{ name: "New Money", photo: 'samples/person/img-004.jpeg'}
+	  ]);
+    
+	    $( document ).delegate("#TopPage", "pageinit", function() {
+		    var FriendsListView = Backbone.View.extend({
+		    	initialize: function() {
+		    	},
+		    	render: function() {		            
+		            this.$el.listview('refresh');
+		    	},
+			    addOne: function(friend) {
+					var view = new App.FriendListItemView({model: friend });
+					var html = view.render().el;
+					this.$el.append(html);
+			    },
+			    addAll: function() {
+			      var self=this;
+			      App.Friends.each(function(friend){self.addOne(friend);});
+			    },
+		    	
+		    });
+		    App.FriendsView = new FriendsListView({el: $("#friendlist")});
+			App.FriendsView.addAll();
+			App.FriendsView.render();
+		});	        
+
+	$(function(){	    
+		// The date of the share...
+	    $('#ShareDate').scroller({
+	        preset: 'date',
+	        theme: 'android-ics light',
+	        dateOrder: 'MmD ddyy',
+	        display: 'inline',
+	        mode: 'scroller'
+	     });    
+	    
+		    var curnames = ['\'000 ￥','$ US', '€ EUR','zł PLZ', '$ CAD', 'RUB','...'];
+		    var moneyselectwheels = [{}];
+		    var wheel = {};
+		    for (var j=0;j<7;j++) {
+		        wheel[curnames[j]] = "<div class='car'>"+curnames[j]+"</div>"
+		    }
+	
+		    var amount = {};
+		    for (var j=0;j<12;j++) {
+		        amount[j] = "<div class='car'>"+j+"</div>"
+		    }
+	
+		    moneyselectwheels[0]['Amount'] = amount;
+		    moneyselectwheels[0]['Currency'] = wheel;
+		
+		    $('#ShareMoney').scroller({
+		        theme: 'android-ics light',
+		        display: 'inline',
+		        mode: 'scroller',
+		        wheels: moneyselectwheels,
+		        height: 40
+		    });    
+	   
+		
+		    var hoursselectorwheels = [{}];
+		    var hours = {};
+		    for (var j=0;j<12;j++) {
+		        hours[j] = "<div class='car'>"+j+"</div>"
+		    }
+		
+		    var minutes = {};
+		    for (var j=0;j<4;j++) {
+		        minutes[j] = "<div class='car'>"+(j*15)+"</div>"
+		    }
+		    hoursselectorwheels[0]['Hours'] = hours;
+		    hoursselectorwheels[0]['Minutes'] = minutes;
+		
+		    $('#ShareHours').scroller({
+		        theme: 'android-ics light',
+		        display: 'inline',
+		        mode: 'scroller',
+		        wheels: hoursselectorwheels,
+		        height: 40
+		    });	
+		});
+
+
+</script>
+        <section id="TopPage" data-role="page" data-theme="s">
+            <header data-role="header" data-position="fixed" data-theme="s">
+            	<a href="#TopPage" data-icon="home" data-iconpos="notext"></a>
+            	<h1>Share!</h1>
+				<a href="#SortPopUp" data-rel="popup" data-theme="s">Sort</a>
+			</header>
+            <div class="content" data-role="content">      
+                <ul id="friendlist" data-role="listview"/>
+            </div>
+            <footer data-role="footer" data-position="fixed" data-theme="s">
+	            <a href="#SharePopUp" data-role="button" 
+	            id="vi-share-button" data-rel="popup" data-inline="true" data-theme="s" >Share!</a>
+            </footer>
+            <div data-role="popup" id="SortPopUp"  data-theme="s">
+            	Sort by...
+				<div data-role="controlgroup" id="vi-sort-select">
+					<a href="#" data-role="button" data-icon="vi-sort-name">Name</a> 
+					<a href="#" data-role="button" data-icon="vi-sort-recent">Recent</a> 
+					<a href="#" data-role="button" data-icon="vi-sort-shuffle">Shuffle</a>
+				</div>
+		    </div>
+		    
+		        <!-- The Share Pop-Up --> 
+		    <div id="SharePopUp" data-role="popup" data-position-to="window" data-tolerance ="2">
+	            <div class="content" data-role="content">
+	            	<header data-role="header"  data-theme="s">
+	                <p>Giving, Receiving, Sharing is good!</p>
+	            	</header>
+	                FROM <img class="vi-user-photo-large" src="samples/person-large/photo.jpeg" style="left:-7.08%;" alt="Victor Vorski" itemprop="photo" >
+	                TO:
+	            	<img class="vi-user-photo-large" src="samples/person-large/img-001.jpeg"/>
+	            	<br/>
+	            	Date:
+	            	<input id="ShareDate" name="i" style="display:none" />
+	            	PHOTO   TEXT
+	            	 <div data-role="navbar" id="ShareTypeTab"  data-theme="s">
+		                <ul id="">
+		                    <li><a href="#" class="ui-btn-active" data-tab-class="tab1" >Time</a></li>
+		                    <li><a href="#" data-tab-class="tab2">£￥$€</a></li>
+		                    <li><a href="#" data-tab-class="tab3">Things</a></li>
+		                    <li><a href="#" data-tab-class="tab4">Promises</a></li>
+		                </ul>
+	            </div>
+            <div class="tab-content">
+                <div class="tab1">
+                     <input id="ShareHours" name="i" style="display:none" />
+                </div>
+                <div class="tab2 ui-screen-hidden">
+                    <input id="ShareMoney" name="i" style="display:none" />
+                </div>
+                <div class="tab3 ui-screen-hidden">
+                    Things:
+                </div>
+                <div class="tab4 ui-screen-hidden">
+                    Promises...
+                </div>
+            </div>	            	
+	            </div>
+	        </div>
+
+        </section>
+
+        
+    </body>
+</html>
