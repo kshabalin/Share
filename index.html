@@ -10,12 +10,6 @@
         <link rel="stylesheet" href="lib/jquery.mobile-1.2.0-rc.2.css" />
         <script src="lib/jquery-1.8.1.min.js"></script>
         <script src="lib/jquery.mobile-1.2.0-rc.2.js"></script>
-
-
-		<!-- <link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0-rc.2/jquery.mobile-1.2.0-rc.2.min.css" />
-		<script src="http://code.jquery.com/jquery-1.8.1.min.js"></script>
-		<script src="http://code.jquery.com/mobile/1.2.0-rc.2/jquery.mobile-1.2.0-rc.2.min.js"></script>
-		-->
 		
 		<!-- scroller widget for date & etc. selection... http://mobiscroll.com/  -->
 		<script src="lib/mobiscroll-2.0.3.custom.min.js"></script>
@@ -26,20 +20,8 @@
 		<link href="lib/mobiscroll.android-ics-2.0.css" rel="stylesheet" type="text/css" />		
 		<script src="lib/underscore.js"></script>
 		<script src="lib/backbone.js"></script>
-		<script src="App.js"></script>
-
-	    <script>
-	    	/* The tabs of share select dialog.*/
-	        var prevSelection = "tab1";
-	        $("#ShareTypeTab ul li").live("click",function(){
-	            var newSelection = $(this).children("a").attr("data-tab-class");
-	            $("."+prevSelection).addClass("ui-screen-hidden");
-	            $("."+newSelection).removeClass("ui-screen-hidden");
-	            prevSelection = newSelection;
-	        });
-	    </script>
-
         <link rel="stylesheet" href="swatch-s.css" />
+		<script src="App.js"></script>
 
     </head>
     <body>
@@ -108,9 +90,6 @@
             </div>	            	
 	            </div>
 	        </div>
-
         </section>
-
-        
     </body>
 </html>
