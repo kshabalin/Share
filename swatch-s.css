@@ -209,11 +209,23 @@
 
 
 /* Things related to our List of friends...*/
+.FriendListItem {
+	position: relative;
+	height: 2em;
+	overflow: hidden;
+}
 .FriendName {
-	position: fixed;
+	position: absolute;
 	left: 0px;
+	bottom: 0px;
 	width: 10%;
 }
+.FriendPhoto {
+	position: absolute;
+	left: 0px;
+	top: 0px;	
+	height: 6em;
+}
 .SharePhoto {
-	height: 40px;
+	height: 3em;
 }

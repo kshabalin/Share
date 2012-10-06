@@ -27,12 +27,16 @@
     <body>
         <!-- The Top Page  --> 
         
+<!-- Template for a list item in the list of Friends -->
 <script id="item-template" type="text/template">
-	<a href="#"><img class="FriendPhoto" src="{{photo}}"/><div class="FriendName">{{name}}</div><div class="FriendShare"></div></a>
+	<a class="FriendListItem" href="#"><img class="FriendPhoto" src="{{photo}}"/><div class="FriendName">{{name}}</div><div class="FriendShare"></div></a>
 </script>
+
+<!-- Template for a share item (sub-item of FriendsList Item) -->
 <script id="item-template-share" type="text/template">
 	<img class="SharePhoto" src="{{photo}}"/>
 </script>
+
 <script type="text/javascript"></script>
         <section id="TopPage" data-role="page" data-theme="s">
             <header data-role="header" data-position="fixed" data-theme="s">
