@@ -1,6 +1,11 @@
 /*
-* A Swatch for ShareMore mobile application...
+	A Swatch for ShareMore mobile application...
+
+
+	Copyright (c) 2012 Vorski Imagineering - Victor Vorski
 */
+
+/* ===================== Theme... ===================== */
 
 .ui-icon-sort-name {
 	background-image: url("images/112-group.png");
@@ -21,31 +26,7 @@
 	border: 0px;
 }
 
-#share-dialog-screen {
-	background-color: black;
-}
 
-#share-dialog .ui-content{
-	padding: 0px;
-		width: 100%;
-
-}
-/* The select button on the main page */
-#sort-select {
-	margin: 0px;
-}
-
-#sort-select .ui_btn {
-	-moz-border-radius: 				0px /*{global-radii-buttons}*/;
-	-webkit-border-radius: 				0px /*{global-radii-buttons}*/;
-	border-radius: 						0px /*{global-radii-buttons}*/;
-
-}
-#share-button {
-	margin: 0 auto;
-	background-image: url("images/petals.jpeg");
-	background-position: 40px 40px;
-}
 .ui-body-s, .ui-body-s .ui-btn-text, .android-ics.light .dw  {
 	font-family: 'Rock Salt', cursive;
 	font-size: 11pt;
@@ -207,6 +188,34 @@
 }
 
 
+/* ===================== Our item styling... ===================== */
+/* Buttons and such */
+#share-dialog-screen {
+	background-color: black;
+}
+
+#share-dialog .ui-content{
+	padding: 0px;
+		width: 100%;
+
+}
+/* The select button on the main page */
+#sort-select {
+	margin: 0px;
+}
+
+#sort-select .ui_btn {
+	-moz-border-radius: 				0px /*{global-radii-buttons}*/;
+	-webkit-border-radius: 				0px /*{global-radii-buttons}*/;
+	border-radius: 						0px /*{global-radii-buttons}*/;
+
+}
+#share-button {
+	margin: 0 auto;
+	background-image: url("images/petals.jpeg");
+	background-position: 40px 40px;
+}
+
 /* Things related to our List of friends...*/
 .friend-list-item {
 	position: relative;
@@ -242,21 +251,40 @@
 }
 
 .share-amount, 
-.share-type {
+.share-date, 
+.share-type,
+.share-info  {
 	position: absolute;
-	right: 0em;
-	top: 0em;	
-	font-size: 0.6em;
-}
-.share-info {
-	position: absolute;
-	height: 4em;
-	width: 4em;
-	right: 0em;
-	bottom: 0em;
-	font-size: 0.6em;
+	font-size: 0.7em;
 	text-overflow: hidden;
 	overflow: hidden;
+}
+
+.share-info {
+	height: 3em;
+	width: 5em;
+	right: 0em;
+	bottom: 0em;
+}
+.share-amount {
+	height: 4em;
+	width: 4em;
+	left: 0em;
+	top: 0em;
+	padding-left: 0.2em;
+}
+.share-date {
+	height: 4em;
+	width: 8em;
+	right: 0em;
+	top: 0em;
+	text-align: right;
+}
+.share-type {
+	height: 4em;
+	width: 4em;
+	left: 0em;
+	top: 0em;
 }
 
 .share-photo {

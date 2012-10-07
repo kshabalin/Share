@@ -27,6 +27,12 @@
 		<script src="lib/underscore.js"></script>
 		<script src="lib/backbone.js"></script>
 		
+		<!-- For date display handling... 
+			This is big (5.6k minified!) so should shrink it perhaps... 
+			From: http://momentjs.com/
+		-->
+		<script src="lib/moment.min.js"></script>
+
         <link rel="stylesheet" href="swatch-s.css" />
 		<script src="App.js"></script>
     </head>
@@ -48,6 +54,7 @@
 				<img class="share-photo" src="{{photo}}"/>
 				<div class="share-amount">{{amount}}</div>
 				<div class="share-info">{{info}}</div>
+				<div class="share-date">{{date}}</div>
 				<div class="share-type share-type-{{type}}"></div>
 			</li>
 		</script>

@@ -83,6 +83,15 @@ function randomWord() {
     }
     return randomString;
 }
+
+/*
+  Generates a random date... 
+  From: http://stackoverflow.com/questions/9035627/elegant-method-to-generate-array-of-random-dates-within-two-dates
+*/
+function randomDate(start, end) {
+    return moment(start.getTime() + Math.random() * (end.getTime() - start.getTime()))
+}
+
 /*
   Generates a random sentence...
   (can be empty)
@@ -105,13 +114,14 @@ function randomSentence() {
 function randomShares() {
 	var shares = [];
 	var count = _.random(1,5);
+	var yearStart = new Date(2010,1,1);
 	for(; count-->0;){
 		shares.push(new App.Share({
-			date: new Date(),
+			date: randomDate(yearStart, new Date()),
 			photo: 	'samples/things/img-00'+(Math.round(1+Math.random()*5))+'.jpeg',
 			info: randomSentence(),
 			type: 'money',
-			amount: Math.round(1+Math.random()*50)
+			amount: _.random(0,100)
 		}));
 	}	
 	return shares;
@@ -139,19 +149,25 @@ $( document ).delegate("#top-page", "pageinit", function() {
 	    initialize: function(){
 	    },
 	    render: function(){
-	    	var dispModel = this.model.toJSON();
-	    	dispModel.name.replace(" ", "<br/>");
-	    	
-	    	var htmlT = this.template(dispModel);
+	    	// Get the model into a format easy to consume by the template... This seems to be the standard pattern... UGH.
+	    	var json = this.model.toJSON();
+	    	json.name = json.name.replace(" ", "<br/>");
+	    		    	
+	    	// Apply underscore template to create our contents...
+	    	var htmlT = this.template(json);
 	        this.$el.html(htmlT);
 
 			// Put the shares into the display
 	        var self = this;
 	    	var theelem = this.$el.find(".friend-shares");
+	    	var now = moment();
 	    	_.each(
 	    		this.model.get("shares"), 
 	    		function(share){
-			        theelem.append(self.shareTemplate(share.toJSON())); 		
+	    			var json = share.toJSON();
+	    			json.date = share.get("date").from(now).replace("ago","");
+			    	console.log(json.date);
+			        theelem.append(self.shareTemplate(json));
 			    }
 			);
 	        return this;
