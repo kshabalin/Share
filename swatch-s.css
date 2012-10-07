@@ -2,13 +2,13 @@
 * A Swatch for ShareMore mobile application...
 */
 
-.ui-icon-vi-sort-name {
+.ui-icon-sort-name {
 	background-image: url("images/112-group.png");
 }
-.ui-icon-vi-sort-recent {
+.ui-icon-sort-recent {
 	background-image: url("images/11-clock.png");
 }
-.ui-icon-vi-sort-shuffle {
+.ui-icon-sort-shuffle {
 	background-image: url("images/05-shuffle.png");
 }
 
@@ -21,27 +21,27 @@
 	border: 0px;
 }
 
-#SharePopUp-screen {
+#share-dialog-screen {
 	background-color: black;
 }
 
-#SharePopUp .ui-content{
+#share-dialog .ui-content{
 	padding: 0px;
 		width: 100%;
 
 }
 /* The select button on the main page */
-#vi-sort-select {
+#sort-select {
 	margin: 0px;
 }
 
-#vi-sort-select .ui_btn {
+#sort-select .ui_btn {
 	-moz-border-radius: 				0px /*{global-radii-buttons}*/;
 	-webkit-border-radius: 				0px /*{global-radii-buttons}*/;
 	border-radius: 						0px /*{global-radii-buttons}*/;
 
 }
-#vi-share-button {
+#share-button {
 	margin: 0 auto;
 	background-image: url("images/petals.jpeg");
 	background-position: 40px 40px;
@@ -51,7 +51,7 @@
 	font-size: 11pt;
 }
 
-.vi-user-photo-large {
+.user-photo-large {
 	height: 40pt;
 }
 .ui-body-s .ui-header .ui-title, .ui-body-s .ui-footer .ui-title { 
@@ -207,25 +207,58 @@
 }
 
 
-
 /* Things related to our List of friends...*/
-.FriendListItem {
+.friend-list-item {
 	position: relative;
 	height: 2em;
 	overflow: hidden;
 }
-.FriendName {
+.friend-name {
 	position: absolute;
-	left: 0px;
+	left: 0.2em;
 	bottom: 0px;
-	width: 10%;
+	opacity: 0.8;
+	width: 5em;
 }
-.FriendPhoto {
+.friend-photo {
 	position: absolute;
 	left: 0px;
 	top: 0px;	
 	height: 6em;
+	opacity: 0.9;
 }
-.SharePhoto {
-	height: 3em;
+.friend-shares {
+	display: inline;
+}
+.share-container {
+	position: relative;
+	display: inline;
+  	float: left;
+	list-style-type: none;
+	height: 5em;
+	width: 8em;
+	margin: 0.2em;
+	background-color: rgba(200,200,200, 0.5);
+}
+
+.share-amount, 
+.share-type {
+	position: absolute;
+	right: 0em;
+	top: 0em;	
+	font-size: 0.6em;
+}
+.share-info {
+	position: absolute;
+	height: 4em;
+	width: 4em;
+	right: 0em;
+	bottom: 0em;
+	font-size: 0.6em;
+	text-overflow: hidden;
+	overflow: hidden;
+}
+
+.share-photo {
+	max-height: 5em;
 }

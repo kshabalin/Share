@@ -1,8 +1,9 @@
 /*
-	The code for the Share! UI.
+	The code for the Share! UI mobile application
 
 	
-	Requires: jQuery Mobile, Bacbone
+	Requires: jQuery Mobile, Backbone
+	
 	Copyright (c) 2012 Vorski Imagineering - Victor Vorski
 */
 
@@ -22,16 +23,16 @@ _.templateSettings = {
 
 $(document).bind( "mobileinit", function(event) {
     $.extend($.mobile.zoom, {locked:true,enabled:false});
-    $('#SharePopUp').popup({ tolerance: "2" });
+    $('#share-dialog').popup({ tolerance: "2" });
 });
 
 $(document).bind( "pagebeforeshow", function(event) {
-    $('#SharePopUp').popup({ tolerance: "0" });
+    $('#share-dialog').popup({ tolerance: "0" });
 });
 
 /*
- General structure based on:
- http://documentcloud.github.com/backbone/docs/todos.html
+ General structure based on example in:
+	 http://documentcloud.github.com/backbone/docs/todos.html
  */
 App.Friend = Backbone.Model.extend({
      defaults: {
@@ -42,12 +43,18 @@ App.Friend = Backbone.Model.extend({
     }
 });
 
-
 var FriendsList =  Backbone.Collection.extend({
         model: App.Friend
 });
+
+// Create singleton for the friends master-list
 App.Friends = new FriendsList;
 
+/*
+	Class: App.Share
+	
+	This models a share between friends.
+*/
 App.Share = Backbone.Model.extend({
     defaults: {
      	from: null, //Person
@@ -63,22 +70,54 @@ App.Share = Backbone.Model.extend({
 });
 
 /*
-	Returns a Javascript array of Share objects.
+  Generates a random word...
+  From: http://stackoverflow.com/questions/1349404/generate-a-string-of-5-random-characters-in-javascript
+*/
+function randomWord() {
+    var charSet = 'abcdefghijklmnopqrstuvwxyz';
+    var randomString = '';
+    var len = _.random(2,7);
+    for (var i = 0; i < len; i++) {
+        var randomPoz = Math.floor(Math.random() * charSet.length);
+        randomString += charSet.substring(randomPoz,randomPoz+1);
+    }
+    return randomString;
+}
+/*
+  Generates a random sentence...
+  (can be empty)
+  
+*/
+function randomSentence() {
+	var sentence = "";
+	var wordCount = _.random(0,5);
+	for(;wordCount-->0;) {
+		sentence += randomWord();
+		sentence += " ";
+	}
+	
+	return sentence;
+}
+
+/*
+	Returns a Javascript array of randomly generated Share objects.
 */
 function randomShares() {
 	var shares = [];
-	var count = Math.random()*10;
+	var count = _.random(1,5);
 	for(; count-->0;){
 		shares.push(new App.Share({
 			date: new Date(),
 			photo: 	'samples/things/img-00'+(Math.round(1+Math.random()*5))+'.jpeg',
-			info: "Foobar",
+			info: randomSentence(),
 			type: 'money',
-			amount: 99
+			amount: Math.round(1+Math.random()*50)
 		}));
 	}	
 	return shares;
 }
+
+// Setup random test data.
 App.Friends.add([
 	{ name: "Bob Smith", photo: 'samples/person/img-001.jpeg', shares: randomShares()},
 	{ name: "Foo Barer", photo: 'samples/person/img-002.jpeg', shares: randomShares()},
@@ -89,7 +128,10 @@ App.Friends.add([
 	{ name: "New Money", photo: 'samples/person/img-004.jpeg', shares: randomShares()}
 ]);
 
-$( document ).delegate("#TopPage", "pageinit", function() {
+/*
+	Because the views depend on templates can only do this stuff after DOM is loaded...
+*/
+$( document ).delegate("#top-page", "pageinit", function() {
 	App.FriendListItemView = Backbone.View.extend({
 		template:  _.template($('#item-template').html()),
 		shareTemplate:  _.template($('#item-template-share').html()),
@@ -97,11 +139,15 @@ $( document ).delegate("#TopPage", "pageinit", function() {
 	    initialize: function(){
 	    },
 	    render: function(){
-	    	var htmlT = this.template(this.model.toJSON());
+	    	var dispModel = this.model.toJSON();
+	    	dispModel.name.replace(" ", "<br/>");
+	    	
+	    	var htmlT = this.template(dispModel);
 	        this.$el.html(htmlT);
 
+			// Put the shares into the display
 	        var self = this;
-	    	var theelem = this.$el.find(".FriendShare");
+	    	var theelem = this.$el.find(".friend-shares");
 	    	_.each(
 	    		this.model.get("shares"), 
 	    		function(share){
@@ -133,9 +179,9 @@ $( document ).delegate("#TopPage", "pageinit", function() {
 	App.FriendsView.render();
 });	        
 
-$(function(){	    
+$(function setupmobiscrollers(){	    
 	// The date of the share...
-	$('#ShareDate').scroller({
+	$('#share-date').scroller({
 	    preset: 'date',
 	    theme: 'android-ics light',
 	    dateOrder: 'MmD ddyy',
@@ -158,7 +204,7 @@ $(function(){
     moneyselectwheels[0]['Amount'] = amount;
     moneyselectwheels[0]['Currency'] = wheel;
 
-    $('#ShareMoney').scroller({
+    $('#share-money').scroller({
         theme: 'android-ics light',
         display: 'inline',
         mode: 'scroller',
@@ -180,7 +226,7 @@ $(function(){
     hoursselectorwheels[0]['Hours'] = hours;
     hoursselectorwheels[0]['Minutes'] = minutes;
 
-    $('#ShareHours').scroller({
+    $('#share-hours').scroller({
         theme: 'android-ics light',
         display: 'inline',
         mode: 'scroller',
@@ -189,9 +235,9 @@ $(function(){
     });	
 });
 
-/* The tabs of share select dialog.*/
+/* Set-up the actions of the tabs of share select dialog.*/
 var prevSelection = "tab1";
-$("#ShareTypeTab ul li").live("click",function(){
+$("#share-type-tab ul li").live("click",function(){
     var newSelection = $(this).children("a").attr("data-tab-class");
     $("."+prevSelection).addClass("ui-screen-hidden");
     $("."+newSelection).removeClass("ui-screen-hidden");

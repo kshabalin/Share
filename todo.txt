@@ -4,6 +4,11 @@ TODO - Share More - UI mockup
 ● Top
 > List friends & shares (Pulse style)
 
+- share display
+-- amount
+-- type
+-- text
+
 - add model for Share's
 
 http://stackoverflow.com/questions/8887440/implementing-a-composite-pattern-using-mvc-backbone-js
@@ -13,9 +18,10 @@ http://stackoverflow.com/questions/8887440/implementing-a-composite-pattern-usin
 -- make button reflect the mutually exlusive selection
 
 
-● Share! pop-up dialog
-- add date scroller
-http://mobiscroll.com/
+● Share! create pop-up dialog
+-- photo upload
+-- text input
+-- clean-up date input.
 
 ● Existing share pop-up
 --> Confirm (if unconfirmed)
@@ -58,6 +64,9 @@ http://blog.codiqa.com/2012/06/the-making-of-a-jquery-mobile-widget-the-tab-bar/
 	    /* Use underscore templates:
 	    	http://documentcloud.github.com/underscore/#template
 	    */
+● Share! pop-up dialog
+- add date scroller
+http://mobiscroll.com/
 
 > List friends & shares (Pulse style)
 http://www.netmagazine.com/tutorials/build-mobile-template-handlebars

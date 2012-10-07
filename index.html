@@ -1,9 +1,15 @@
 <!DOCTYPE HTML>
 <html>
+<!-- 
+	Share! mobile application
+
+	Copyright (c) 2012 Vorski Imagineering - Victor Vorski
+-->
     <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>Share!</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scaleable=no">
+        
+	    <title>Share!</title>
  
         <link href='http://fonts.googleapis.com/css?family=Rock+Salt' rel='stylesheet' type='text/css'>
 
@@ -20,60 +26,70 @@
 		<link href="lib/mobiscroll.android-ics-2.0.css" rel="stylesheet" type="text/css" />		
 		<script src="lib/underscore.js"></script>
 		<script src="lib/backbone.js"></script>
+		
         <link rel="stylesheet" href="swatch-s.css" />
 		<script src="App.js"></script>
-
     </head>
-    <body>
-        <!-- The Top Page  --> 
+    
+    <body>        
+		<!-- Template for a list item in the list of Friends -->
+		<script id="item-template" type="text/template">
+			<a class="friend-list-item" href="#">
+				<img class="friend-photo" src="{{photo}}"/>
+				<div class="friend-name">{{name}}</div>
+				<ul class="friend-shares"/>
+			</a>
+		</script>
+		
+
+		<!-- Template for a share item (sub-item of FriendsList Item) -->
+		<script id="item-template-share" type="text/template">
+			<li class="share-container">
+				<img class="share-photo" src="{{photo}}"/>
+				<div class="share-amount">{{amount}}</div>
+				<div class="share-info">{{info}}</div>
+				<div class="share-type share-type-{{type}}"></div>
+			</li>
+		</script>
+
+        <!-- ----------------- The Top Page  ----------------- --> 
         
-<!-- Template for a list item in the list of Friends -->
-<script id="item-template" type="text/template">
-	<a class="FriendListItem" href="#"><img class="FriendPhoto" src="{{photo}}"/><div class="FriendName">{{name}}</div><div class="FriendShare"></div></a>
-</script>
-
-<!-- Template for a share item (sub-item of FriendsList Item) -->
-<script id="item-template-share" type="text/template">
-	<img class="SharePhoto" src="{{photo}}"/>
-</script>
-
-<script type="text/javascript"></script>
-        <section id="TopPage" data-role="page" data-theme="s">
+        <section id="top-page" data-role="page" data-theme="s">
             <header data-role="header" data-position="fixed" data-theme="s">
-            	<a href="#TopPage" data-icon="home" data-iconpos="notext"></a>
+            	<a href="#top-page" data-icon="home" data-iconpos="notext"></a>
             	<h1>Share!</h1>
-				<a href="#SortPopUp" data-rel="popup" data-theme="s">Sort</a>
+				<a href="#sort-selector" data-rel="popup" data-theme="s">Sort</a>
 			</header>
             <div class="content" data-role="content">      
                 <ul id="friendlist" data-role="listview"/>
             </div>
             <footer data-role="footer" data-position="fixed" data-theme="s">
-	            <a href="#SharePopUp" data-role="button" 
-	            id="vi-share-button" data-rel="popup" data-inline="true" data-theme="s" >Share!</a>
+	            <a href="#share-dialog" data-role="button" 
+	            id="share-button" data-rel="popup" data-inline="true" data-theme="s" >Share!</a>
             </footer>
-            <div data-role="popup" id="SortPopUp"  data-theme="s">
+            <div data-role="popup" id="sort-selector"  data-theme="s">
             	Sort by...
-				<div data-role="controlgroup" id="vi-sort-select">
-					<a href="#" data-role="button" data-icon="vi-sort-name">Name</a> 
-					<a href="#" data-role="button" data-icon="vi-sort-recent">Recent</a> 
-					<a href="#" data-role="button" data-icon="vi-sort-shuffle">Shuffle</a>
+				<div id="sort-select" data-role="controlgroup" >
+					<a href="#" data-role="button" data-icon="sort-name">Name</a> 
+					<a href="#" data-role="button" data-icon="sort-recent">Recent</a> 
+					<a href="#" data-role="button" data-icon="sort-shuffle">Shuffle</a>
 				</div>
 		    </div>
 		    
 		        <!-- The Share Pop-Up --> 
-		    <div id="SharePopUp" data-role="popup" data-position-to="window" data-tolerance ="2">
+		    <div id="share-dialog" data-role="popup" data-position-to="window" data-tolerance ="2">
 	            <div class="content" data-role="content">
 	            	<header data-role="header"  data-theme="s">
 	                <p>Giving, Receiving, Sharing is good!</p>
 	            	</header>
-	                FROM <img class="vi-user-photo-large" src="samples/person-large/photo.jpeg" style="left:-7.08%;" alt="Victor Vorski" itemprop="photo" >
+	                FROM <img class="user-photo-large" src="samples/person-large/photo.jpeg" style="left:-7.08%;" alt="Victor Vorski" itemprop="photo" >
 	                TO:
-	            	<img class="vi-user-photo-large" src="samples/person-large/img-001.jpeg"/>
+	            	<img class="user-photo-large" src="samples/person-large/img-001.jpeg"/>
 	            	<br/>
 	            	Date:
-	            	<input id="ShareDate" name="i" style="display:none" />
+	            	<input id="share-date" name="i" style="display:none" />
 	            	PHOTO   TEXT
-	            	 <div data-role="navbar" id="ShareTypeTab"  data-theme="s">
+	            	 <div data-role="navbar" id="share-type-tab"  data-theme="s">
 		                <ul id="">
 		                    <li><a href="#" class="ui-btn-active" data-tab-class="tab1" >Time</a></li>
 		                    <li><a href="#" data-tab-class="tab2">£￥$€</a></li>
@@ -83,10 +99,10 @@
 	            </div>
             <div class="tab-content">
                 <div class="tab1">
-                     <input id="ShareHours" name="i" style="display:none" />
+                     <input id="share-hours" name="i" style="display:none" />
                 </div>
                 <div class="tab2 ui-screen-hidden">
-                    <input id="ShareMoney" name="i" style="display:none" />
+                    <input id="share-money" name="i" style="display:none" />
                 </div>
                 <div class="tab3 ui-screen-hidden">
                     Things:
