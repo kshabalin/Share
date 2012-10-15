@@ -12,19 +12,28 @@
 	    <title>Share!</title>
  
         <link href='http://fonts.googleapis.com/css?family=Rock+Salt' rel='stylesheet' type='text/css'>
-
-        <link rel="stylesheet" href="lib/jquery.mobile-1.2.0-rc.2.css" />
         <script src="lib/jquery-1.8.1.min.js"></script>
+
+		<!-- For doing dynamic stuff for certain paths within jQueryMobile...
+			https://github.com/azicchetti/jquerymobile-router#readme
+			The jQuery Mobile router javascript file must be loaded before jQuery Mobile.	
+		-->
+		<script src="lib/jquery.mobile.router.js"></script>
+
+		<!-- we modify the routing with plugins, but we use the basic structure of jQuery Mobile -->
+        <link rel="stylesheet" href="lib/jquery.mobile-1.2.0-rc.2.css" />
         <script src="lib/jquery.mobile-1.2.0-rc.2.js"></script>
 		
 		<!-- scroller widget for date & etc. selection... http://mobiscroll.com/  -->
-		<script src="lib/mobiscroll-2.0.3.custom.min.js"></script>
-		
+		<script src="lib/mobiscroll-2.0.3.custom.min.js"></script>		
 		<link rel="stylesheet" href="lib/mobiscroll-2.0.3.custom.min.css" />
-
 		<script src="lib/mobiscroll.android-ics-2.0.js" type="text/javascript"></script>
 		<link href="lib/mobiscroll.android-ics-2.0.css" rel="stylesheet" type="text/css" />		
+		
+		<!-- Underscore for the usual helpers (required by backbone.js) -->
 		<script src="lib/underscore.js"></script>
+		
+		<!-- Backbone for our data models... -->
 		<script src="lib/backbone.js"></script>
 		
 		<!-- For date display handling... 
@@ -33,11 +42,10 @@
 		-->
 		<script src="lib/moment.min.js"></script>
 
-		<!-- For doing dynamic stuff for certain paths...
-			https://github.com/azicchetti/jquerymobile-router#readme
-		-->
         <link rel="stylesheet" href="swatch-s.css" />
 		<script src="App.js"></script>
+		<script src="GenerateDummyData.js"></script>
+		<script src="ShareDialog.js"></script>
     </head>
     
     <body>        

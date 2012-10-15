@@ -1,17 +1,21 @@
 TODO - Share More - UI mockup
 
-Using iScroll to contain the list...
-https://github.com/watusi/jquery-mobile-iscrollview#readme
 
-To make the header customized...
-http://jquerymobile.com/demos/1.0a3/#docs/toolbars/docs-headers.html
+● Person view page
+Set up JQuery mobile router:
+https://github.com/azicchetti/jquerymobile-router#readme
 
-Last topic in this page:
-
-"If you need to to create a header that doesn't follow the default configuration, simply wrap your custom styled markup in a container div inside the header container and the plugin won't apply the automatic button logic so you can write custom styles for laying out the content in your header."
+Dynamically create page
+http://stackoverflow.com/questions/12591473/best-way-to-dynamically-create-new-pages-in-jquery-mobile-from-ajaxjson-data
 
 ● Top
-> List friends & shares (Pulse style)
+> Use iScroll to contain the list...
+https://github.com/watusi/jquery-mobile-iscrollview#readme
+
+● Move to git hub...
+
+> List friends & shares 
+- scroll shares left-right Pulse style
 
 - share display
 -- from/to...
@@ -31,16 +35,12 @@ Last topic in this page:
 --> Confirm (if unconfirmed)
 
 
-● Person view page
-Set up JQuery mobile router:
-https://github.com/azicchetti/jquerymobile-router#readme
-
-Dynamically create page
-http://stackoverflow.com/questions/12591473/best-way-to-dynamically-create-new-pages-in-jquery-mobile-from-ajaxjson-data
-
-
 ● Top
 > Filter Money, Time, Things, Promises
+
+● Localization
+
+
 
 ___________________________________________________________
 _________________________  done  __________________________
@@ -94,4 +94,13 @@ http://stackoverflow.com/questions/8887440/implementing-a-composite-pattern-usin
 -- amount
 -- text
 
+
+======  DEV TIPS & NOTES
+
+To make the header customized...
+http://jquerymobile.com/demos/1.0a3/#docs/toolbars/docs-headers.html
+
+Last topic in this page:
+
+"If you need to to create a header that doesn't follow the default configuration, simply wrap your custom styled markup in a container div inside the header container and the plugin won't apply the automatic button logic so you can write custom styles for laying out the content in your header."
 
