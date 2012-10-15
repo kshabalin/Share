@@ -89,7 +89,7 @@ function randomWord() {
   From: http://stackoverflow.com/questions/9035627/elegant-method-to-generate-array-of-random-dates-within-two-dates
 */
 function randomDate(start, end) {
-    return moment(start.getTime() + Math.random() * (end.getTime() - start.getTime()))
+    return moment(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
 }
 
 /*
@@ -114,15 +114,17 @@ function randomSentence() {
 function randomShares() {
 	var shares = [];
 	var count = _.random(1,5);
-	var yearStart = new Date(2010,1,1);
+	var startDate = moment();
+	startDate.subtract('days',_.random(0,40));
 	for(; count-->0;){
 		shares.push(new App.Share({
-			date: randomDate(yearStart, new Date()),
+			date: moment(startDate),
 			photo: 	'samples/things/img-00'+(Math.round(1+Math.random()*5))+'.jpeg',
 			info: randomSentence(),
 			type: 'money',
 			amount: _.random(0,100)
 		}));
+		startDate.subtract('days',_.random(10,220));
 	}	
 	return shares;
 }

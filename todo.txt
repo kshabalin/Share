@@ -1,5 +1,9 @@
 TODO - Share More - UI mockup
 
+Using iScroll to contain the list...
+https://github.com/watusi/jquery-mobile-iscrollview#readme
+
+To make the header customized...
 http://jquerymobile.com/demos/1.0a3/#docs/toolbars/docs-headers.html
 
 Last topic in this page:
@@ -10,15 +14,12 @@ Last topic in this page:
 > List friends & shares (Pulse style)
 
 - share display
+-- from/to...
 -- type
-
-- add model for Share's
-
-http://stackoverflow.com/questions/8887440/implementing-a-composite-pattern-using-mvc-backbone-js
 
 > Sort
 -- store sort state...
--- make button reflect the mutually exlusive selection
+-- make button reflect the mutually exclusive selection
 
 
 ● Share! create pop-up dialog
@@ -41,8 +42,10 @@ http://stackoverflow.com/questions/12591473/best-way-to-dynamically-create-new-p
 ● Top
 > Filter Money, Time, Things, Promises
 
+___________________________________________________________
+_________________________  done  __________________________
+___________________________________________________________
 
-_________________________  DONE  __________________________
 ● Top > Sort
 -- add Sort button to top header
 -- add pop-up with button  "Name", "Recent", "Shuffle"
@@ -80,8 +83,15 @@ http://documentcloud.github.com/backbone/docs/todos.html
 COnvert to proper Convention for namespaces
 http://ricostacruz.com/backbone-patterns/#namespace_convention
 
+- add model for Share's
+
+http://stackoverflow.com/questions/8887440/implementing-a-composite-pattern-using-mvc-backbone-js
+
+
 > List friends & shares 
 - share display
 -- display how long ago
 -- amount
 -- text
+
+
