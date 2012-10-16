@@ -49,6 +49,7 @@ function randomSentence() {
 	
 	return sentence;
 }
+var idCounter = _.random(0,10000)
 
 /*
 	Returns a Javascript array of randomly generated Share objects.
@@ -64,7 +65,8 @@ function randomShares() {
 			photo: 	'samples/things/img-00'+(Math.round(1+Math.random()*5))+'.jpeg',
 			info: randomSentence(),
 			type: 'money',
-			amount: _.random(0,100)
+			amount: _.random(0,100),
+			id: idCounter++
 		}));
 		startDate.subtract('days',_.random(10,220));
 	}	
@@ -73,11 +75,11 @@ function randomShares() {
 
 // Setup random test data.
 App.Friends.add([
-	{ name: "Bob Smith", photo: 'samples/person/img-001.jpeg', shares: randomShares()},
-	{ name: "Foo Barer", photo: 'samples/person/img-002.jpeg', shares: randomShares()},
-	{ name: "Hello Worlder", photo: 'samples/person/img-003.jpeg', shares: randomShares()},
-	{ name: "Hello Wzxcsdf orlder", photo: 'samples/person/img-004.jpeg', shares: randomShares()},
-	{ name: "Foo asdsdf", photo: 'samples/person/img-005.jpeg', shares: randomShares()},
-	{ name: "Monetary Ecology", photo: 'samples/person/img-006.jpeg', shares: randomShares()},
-	{ name: "New Money", photo: 'samples/person/img-004.jpeg', shares: randomShares()}
+	{ name: "Bob Smith", photo: 'samples/person/img-001.jpeg', id: idCounter++,shares: randomShares()},
+	{ name: "Foo Barer", photo: 'samples/person/img-002.jpeg', id: idCounter++,shares: randomShares()},
+	{ name: "Hello Worlder", photo: 'samples/person/img-003.jpeg', id: idCounter++,shares: randomShares()},
+	{ name: "Hello Wzxcsdf orlder", photo: 'samples/person/img-004.jpeg', id: idCounter++,shares: randomShares()},
+	{ name: "Foo asdsdf", photo: 'samples/person/img-005.jpeg', id: idCounter++,shares: randomShares()},
+	{ name: "Monetary Ecology", photo: 'samples/person/img-006.jpeg', id: idCounter++,shares: randomShares()},
+	{ name: "New Money", photo: 'samples/person/img-004.jpeg', id: idCounter++,shares: randomShares()}
 ]);

@@ -7,12 +7,13 @@
 	Copyright (c) 2012 Vorski Imagineering - Victor Vorski
 */
 
-
-// Set-up the namespace we put everything into...
-// From: http://ricostacruz.com/backbone-patterns/#namespace_convention
+/* Set-up the namespace we put everything into...
+ From: http://ricostacruz.com/backbone-patterns/#namespace_convention
+*/
 var App = window.App = window.App || {};
 
-/* Set underscore.js to use moustache style template format, 
+/* Set underscore.js to use moustache style template format.
+
 	NOTE!!! will not work for looping...
 	http://stackoverflow.com/questions/9002203/backbone-underscore-template-in-mustache-format-causing-error-on-pound-hash-sy
 */
@@ -23,29 +24,26 @@ _.templateSettings = {
 
 $(document).bind( "mobileinit", function(event) {
 	/* Disallow the page from being resized... */
-    $.extend($.mobile.zoom, {locked:true,enabled:false});
-    
-    /*  Set the size of the The Share Pop-Up
-    	http://stage.api.jquerymobile.com/popup/#option-tolerance
-      Sets the minimum distance from the edge of the window for the corresponding edge of the popup. By default, the values above will be used for the distance from the top, right, bottom, and left edge of the window, respectively.    
-      A single number. This number will be used for all four edge tolerances.
-    */
-//    $('#share-dialog').popup({ tolerance: "12" });
+    $.extend($.mobile.zoom, {locked:true,enabled:false});    
 });
 
-/*
- General structure based on example in:
+/* *******************************************************
+	Class: App.Friend
+
+     Backbone Data model based on example in:
 	 http://documentcloud.github.com/backbone/docs/todos.html
  */
 App.Friend = Backbone.Model.extend({
      defaults: {
         name: 'John Doe',
         photo: 'samples/person/img-006.jpeg',
+        id: 0, // This must be set...
     },
     initialize: function(){
     }
 });
 
+// Currently there can be only one
 var FriendsList =  Backbone.Collection.extend({
         model: App.Friend
 });
@@ -53,7 +51,7 @@ var FriendsList =  Backbone.Collection.extend({
 // Create singleton for the friends master-list
 App.Friends = new FriendsList;
 
-/*
+/* *******************************************************
 	Class: App.Share
 	
 	This models a share between friends.
@@ -66,7 +64,8 @@ App.Share = Backbone.Model.extend({
         photo: 'samples/person/img-006.jpeg',
         info: '<i>Description</i>',
         type: 'money',//, things, promise, time
-        amount: 99
+        amount: 99,
+        id: 0 // This must be set...
     },
     initialize: function(){
     }
@@ -127,3 +126,15 @@ $( document ).delegate("#top-page", "pageinit", function() {
 	App.FriendsView.addAll();
 	App.FriendsView.render();
 });	        
+
+
+/* ----------- Set up the Router 
+    so we can dynamically auto-generate pages -------- */
+
+/* From: http://jquerymobile.com/demos/1.2.0/docs/api/events.html
+  by binding to pagebeforecreate, you can manipulate markup before jQuery Mobile's default widgets are auto-initialized. For example, say you want to add data-attributes via JavaScript instead of in the HTML source, this is the event you'd use.
+*/
+var approuter=new $.mobile.Router([
+	{ "#share(?:[?](.*))?": {events: "bc", handler: function () {console.log("hello share"); }} },
+	{ "#friend(?:[?](.*))?": {events: "bc", handler: function () {console.log("hello friend"); }} } 
+]);

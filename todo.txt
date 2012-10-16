@@ -12,6 +12,7 @@ http://stackoverflow.com/questions/12591473/best-way-to-dynamically-create-new-p
 > Use iScroll to contain the list...
 https://github.com/watusi/jquery-mobile-iscrollview#readme
 
+● Share -> Dialog?
 ● Move to git hub...
 
 > List friends & shares 

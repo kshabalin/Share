@@ -49,9 +49,9 @@
     </head>
     
     <body>        
-		<!-- Template for a list item in the list of Friends -->
+		<!-- ----------------- Template for a list item in the list of Friends -->
 		<script id="item-template" type="text/template">
-			<a class="friend-list-item" href="#">
+			<a class="friend-list-item" href="#friend?id={{id}}">
 				<img class="friend-photo" src="{{photo}}"/>
 				<div class="friend-name">{{name}}</div>
 				<ul class="friend-shares"/>
@@ -59,18 +59,22 @@
 		</script>
 		
 
-		<!-- Template for a share item (sub-item of FriendsList Item) -->
+		<!--  ----------------- Template for a share item (sub-item of FriendsList Item) -->
+
 		<script id="item-template-share" type="text/template">
 			<li class="share-container">
-				<img class="share-photo" src="{{photo}}"/>
-				<div class="share-amount">{{amount}}</div>
-				<div class="share-info">{{info}}</div>
-				<div class="share-date">{{date}}</div>
-				<div class="share-type share-type-{{type}}"></div>
+				<a  href="#share?id={{id}}">
+					<img class="share-photo" src="{{photo}}"/>
+					<div class="share-amount">{{amount}}</div>
+					<div class="share-info">{{info}}</div>
+					<div class="share-date">{{date}}</div>
+					<div class="share-type share-type-{{type}}"></div>
+				</a>
 			</li>
 		</script>
 
-        <!-- ----------------- The Top Page  ----------------- --> 
+
+        <!-- -----------------  The Top Page   ----------------- --> 
         
         <section id="top-page" data-role="page" data-theme="s">
             <header data-role="header" data-position="fixed" data-theme="s">
@@ -94,7 +98,9 @@
 				</div>
 		    </div>
 		    
-		        <!-- The Share Pop-Up --> 
+		    
+		    <!-- ----------------- Create New Share Pop-Up ----------------- --> 
+		    
 		    <div id="share-dialog" data-role="popup" data-position-to="window" data-tolerance ="2">
 	            <div class="content" data-role="content">
 	            	<header data-role="header"  data-theme="s">
@@ -132,5 +138,30 @@
 	            </div>
 	        </div>
         </section>
+        
+        
+		<!-- ----------------- Page to show all info about one friend ----------------- --> 
+
+        <section id="friend" data-role="dialog" data-theme="s">
+            <header data-role="header" data-position="fixed" data-theme="s">
+            	<a href="#top-page" data-icon="home" data-iconpos="notext"></a>
+            	<h1>Your friend...</h1>
+        	</header>
+            <div class="content" data-role="content">      
+            </div>
+        </section>
+
+
+		<!-- ----------------- Page to show all info about one share ----------------- --> 
+
+		<section id="share" data-role="dialog" data-theme="s">
+		    <header data-role="header" data-position="fixed" data-theme="s">
+		    	<a href="#top-page" data-icon="home" data-iconpos="notext"></a>
+		    	<h1>Share!</h1>
+			</header>
+		    <div class="content" data-role="content">      
+		    </div>
+		</section>
+
     </body>
 </html>
