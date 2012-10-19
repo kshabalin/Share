@@ -75,9 +75,11 @@ App.Share = Backbone.Model.extend({
 	Because the views depend on templates can only do this stuff after DOM is loaded...
 */
 $( document ).delegate("#top-page", "pageinit", function() {
+
+	/* The view for rendering one Friend */
 	App.FriendListItemView = Backbone.View.extend({
-		template:  _.template($('#item-template').html()),
-		shareTemplate:  _.template($('#item-template-share').html()),
+		template:  _.template($('#friend-list-item-template').html()),
+		shareTemplate:  _.template($('#friend-list-item-template-share').html()),
 		tagName:  "li",
 	    initialize: function(){
 	    },
@@ -105,6 +107,8 @@ $( document ).delegate("#top-page", "pageinit", function() {
 	        return this;
 	    }
 	});
+	
+	/* The view for rendering a list of Friends */	
     var FriendsListView = Backbone.View.extend({
     	initialize: function() {
     	},
@@ -125,6 +129,21 @@ $( document ).delegate("#top-page", "pageinit", function() {
     App.FriendsView = new FriendsListView({el: $("#friendlist")});
 	App.FriendsView.addAll();
 	App.FriendsView.render();
+	
+	App.ShareItemView = Backbone.View.extend({
+		template:  _.template($('#share-info-template').html()),
+	    initialize: function(){
+	    },
+	    render: function(){
+	    	// Get the model into a format easy to consume by the template... 
+	    	var json = this.model.toJSON();
+	    		    	
+	    	// Apply underscore template to create our contents...
+	    	var htmlT = this.template(json);
+	        this.$el.html(htmlT);
+	        return this;
+	    }
+	});
 });	        
 
 
@@ -133,8 +152,23 @@ $( document ).delegate("#top-page", "pageinit", function() {
 
 /* From: http://jquerymobile.com/demos/1.2.0/docs/api/events.html
   by binding to pagebeforecreate, you can manipulate markup before jQuery Mobile's default widgets are auto-initialized. For example, say you want to add data-attributes via JavaScript instead of in the HTML source, this is the event you'd use.
+  
+  handlerName: function(eventType, matchObj, ui, page, evt){
+  
+  eventType: the name of the jQM event that's triggering the handler (pagebeforeshow, pagecreate, pagehide, etc)
+  
+  matchObj: the handler is called when your regular expression matches the current url or fragment. This is the match object of the regular expression. If the regular expression uses groups, they will be available in this object. Cool eh?
+  
+  ui: this is the second argument provided by the jQuery Mobile event. Usually holds the reference to either the next page (nextPage) or previous page (prevPage). More information here: (http://jquerymobile.com/demos/1.0/docs/api/events.html)[http://jquerymobile.com/demos/1.0/docs/api/events.html]
+  
+  page: the dom element that originated the jquery mobile page event
+  
+  evt: the original event that comes from jquery mobile. You can use this to prevent the default behaviour and, for instance, stop a certain page from being removed from the dom during the pageremove event.
 */
 var approuter=new $.mobile.Router([
-	{ "#share(?:[?](.*))?": {events: "bc", handler: function () {console.log("hello share"); }} },
+	{ "#share[?]id=(\\d+)": {events: "bc", handler: 
+		function(eventType, matchObj, ui, page, evt) {
+			console.log("hello share","eventType=",eventType, "id=",matchObj[1], "ui=", ui, "page=", page, "evt=", evt); }} 
+		},
 	{ "#friend(?:[?](.*))?": {events: "bc", handler: function () {console.log("hello friend"); }} } 
 ]);
