@@ -1,4 +1,4 @@
-Share
+Share!
 ================================================================================
 
 A project to learn jQuery Mobile and modern client-side programming,
