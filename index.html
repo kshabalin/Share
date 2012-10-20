@@ -95,7 +95,7 @@
             <header data-role="header" data-position="fixed" data-theme="s">
             	<a href="#top-page" data-icon="home" data-iconpos="notext"></a>
             	<h1>Share!</h1>
-				<a href="#sort-selector" data-rel="popup" data-theme="s">Sort</a>
+				<a href="#filter-selector" data-rel="popup" data-theme="s">▼</a>
 			</header>
             <div class="content" data-role="content">      
                 <ul id="friendlist" data-role="listview"/>
@@ -104,13 +104,21 @@
 	            <a href="#share-dialog" data-role="button" 
 	            id="share-button" data-rel="popup" data-inline="true" data-theme="s" >Share!</a>
             </footer>
-            <div data-role="popup" id="sort-selector"  data-theme="s">
-            	Sort by...
-				<div id="sort-select" data-role="controlgroup" >
-					<a href="#" data-role="button" data-icon="sort-name">Name</a> 
-					<a href="#" data-role="button" data-icon="sort-recent">Recent</a> 
-					<a href="#" data-role="button" data-icon="sort-shuffle">Shuffle</a>
-				</div>
+            <div data-role="popup" id="filter-selector"  data-theme="s">
+				<div id="filter-type-select" data-role="fieldcontain" >
+				    <fieldset data-role="controlgroup">
+				
+					<label><input type="checkbox" name="FilterType:Time" />Time</label>
+					<label><input type="checkbox" name="FilterType:Time" />Things</label>
+					<label><input type="checkbox" name="FilterType:Time" />Money</label>
+					<label><input type="checkbox" name="FilterType:Time" />Promises</label>
+					</fieldset>
+				</div>					
+				<div id="filter-type-select" data-role="fieldcontain" >
+				    <fieldset data-role="controlgroup">
+					<label><input type="checkbox" name="FilterType:Time" />Given</label>
+					<label><input type="checkbox" name="FilterType:Time" />Received</label>
+				</fieldset>
 		    </div>
 		    
 		    

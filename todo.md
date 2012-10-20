@@ -1,35 +1,40 @@
 Share! - UI mockup - TODOs
 ================================================================================
 
-# ======  DEV TIPS & NOTES
+## ======  DEV TIPS & NOTES
 
-To make the header customized...
+### To make the jqmobile header customized...
 http://jquerymobile.com/demos/1.0a3/#docs/toolbars/docs-headers.html
 
 Last topic in this page:
 
 "If you need to to create a header that doesn't follow the default configuration, simply wrap your custom styled markup in a container div inside the header container and the plugin won't apply the automatic button logic so you can write custom styles for laying out the content in your header."
 
-
-# TODOs
-
-## Backbone book Marrionette chapter...
+### Backbone book Marrionette chapter...
     http://addyosmani.github.com/backbone-fundamentals/#marionette
 
 
-## ● Person view page
+ TODOs
+------------------------
+
+### ?set-up on heroku so can do git-push deploys?
+
+### ?? require.js?
+Should I be using http://requirejs.org/
+
+### ● Person view page
 Set up JQuery mobile router:
 https://github.com/azicchetti/jquerymobile-router#readme
 
 Dynamically create page
 http://stackoverflow.com/questions/12591473/best-way-to-dynamically-create-new-pages-in-jquery-mobile-from-ajaxjson-data
 
-## Sort -> Filter pop-up
+### Sort -> Filter pop-up
 -- store sort state...
 -- make button reflect the mutually exclusive selection
 
 
-## ● Top
+### ● Top
 > Add Facebook/etc. left-side page-slide menu
 http://blog.aldomatic.com/facebook-style-slide-out-menu-in-jquery-mobile//
 http://srobbin.github.com/jquery-pageslide/
@@ -39,7 +44,7 @@ https://github.com/tegansnyder/JQuery-Mobile-Slide-Menu
 > Use iScroll to contain the list...
 https://github.com/watusi/jquery-mobile-iscrollview#readme
 
-##● Share Pop-Up -> Dialog?
+###● Share Pop-Up -> Dialog?
 
 > List friends & shares 
 - scroll shares left-right Pulse style
@@ -50,19 +55,21 @@ https://github.com/watusi/jquery-mobile-iscrollview#readme
 
 
 
-## ● Share! create pop-up dialog
+### ● Share! create pop-up dialog
 -- photo upload
 -- text input
 -- clean-up date input.
 
-## ● Existing share pop-up
+### ● Existing share pop-up
 --> Confirm (if unconfirmed)
 
 
-● Top
+### ● Top
 > Filter Money, Time, Things, Promises
 
-● Localization
+### Notifications pop-down
+
+###● Localization
 Multilanguage UI... Ideally want to have an all-icon UI though...
 no language whatsoever...
 
