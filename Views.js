@@ -26,15 +26,16 @@ $(document).bind( "mobileinit", function(event) {
 /* The Filter is a model but it's for view-side only so we're declaring it here */
 var FilterModel =  Backbone.Model.extend({
     defaults: {
-      received: true,
-      given: true,
-      time: true,
-      things: true,
-      money:true,
-      promises: true
+      received: "checked",
+      given: "checked",
+      time: "checked",
+      things: null,
+      money: "checked",
+      promises: null
     },
 });
 App.FILTER = new FilterModel;
+
 
 /*
   Because the views depend on templates can only do this stuff after DOM is loaded...
@@ -44,25 +45,27 @@ App.FILTER = new FilterModel;
 
 */
 $( document ).delegate("#top-page", "pagebeforecreate", function() {
-
-      // ======================= LIST FILTER =============
+/* pagebeforechange
+This event is triggered prior to any page loading or transition. Callbacks can prevent execution of the changePage() function by calling preventDefault on the event object passed into the callback. The callback also receives a data object as its 2nd arg. The data object has the following properties:
+*/
+      // ======================= LIST FILTER VIEW =============
     App.View.Filter = Backbone.Marionette.ItemView.extend({
         template:  '#filter-template',
         tagName : 'div',
-        onRender: function () {
-              // kick jQuery Mobile so it will decorate this
-            // $(this.el).page();
-        },
+      });
 
-    });
      App.View.FILTER = new App.View.Filter({
-    el: $("#the-filters"),
-    tagName: "div",
-    model: App.FILTER
-  });
+        el: $("#the-filters"),
+        tagName: "div",
+        model: App.FILTER
+      });
  
       App.View.FILTER.render();  
 
+      // Transmit the UI change to model changes
+      $("#the-filters input[type='checkbox']").bind( "change", function(event, ui) {
+        App.FILTER.set(event.target.name,event.target.checked?"checked":null);
+      });
 });
 /*
 	Because the views depend on templates can only do this stuff after DOM is loaded...
@@ -72,6 +75,9 @@ $( document ).delegate("#top-page", "pagebeforecreate", function() {
 
 */
 $( document ).delegate("#top-page", "pageinit", function() {
+  /*pageinit
+Triggered on the page being initialized, after initialization occurs. We recommend binding to this event instead of DOM ready() because this will work regardless of whether the page is loaded directly or if the content is pulled into another page as part of the Ajax navigation system.
+*/
   // ======================= GENERIC BASE CLASSES =============
 
   /* Set-up the basic decorators for shares... */
