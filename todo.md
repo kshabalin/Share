@@ -1,4 +1,8 @@
-TODO - Share More - UI mockup
+TODO - Share! - UI mockup
+
+
+● Backbone book...
+http://addyosmani.github.com/backbone-fundamentals/#marionette
 
 
 ● Person view page
@@ -8,11 +12,22 @@ https://github.com/azicchetti/jquerymobile-router#readme
 Dynamically create page
 http://stackoverflow.com/questions/12591473/best-way-to-dynamically-create-new-pages-in-jquery-mobile-from-ajaxjson-data
 
+> Sort -> Filter pop-up
+-- store sort state...
+-- make button reflect the mutually exclusive selection
+
+
 ● Top
+> Add Facebook/etc. left-side page-slide menu
+http://blog.aldomatic.com/facebook-style-slide-out-menu-in-jquery-mobile//
+http://srobbin.github.com/jquery-pageslide/
+http://forum.jquery.com/topic/google-facebook-style-side-navigation-with-jquery-mobile
+https://github.com/tegansnyder/JQuery-Mobile-Slide-Menu
+
 > Use iScroll to contain the list...
 https://github.com/watusi/jquery-mobile-iscrollview#readme
 
-● Share -> Dialog?
+● Share Pop-Up -> Dialog?
 
 > List friends & shares 
 - scroll shares left-right Pulse style
@@ -21,9 +36,6 @@ https://github.com/watusi/jquery-mobile-iscrollview#readme
 -- from/to...
 -- type
 
-> Sort
--- store sort state...
--- make button reflect the mutually exclusive selection
 
 
 ● Share! create pop-up dialog
