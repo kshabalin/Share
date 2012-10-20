@@ -185,8 +185,23 @@ $( document ).delegate("#top-page", "pageinit", function() {
 });
 
 
-/* ----------- Set up the Router 
-    so we can dynamically auto-generate pages -------- */
+// ==================  Set up the ROUTER =================== 
+/* 
+  Using: https://github.com/azicchetti/jquerymobile-router#readme
+  Please refer to the following schema to understand event codes (it's really straightforward)
+
+        bc  => pagebeforecreate
+        c   => pagecreate
+        i   => pageinit
+        bs  => pagebeforeshow
+        s   => pageshow
+        bh  => pagebeforehide
+        h   => pagehide
+        rm  => pageremove
+        bC  => pagebeforechange
+        bl  => pagebeforeload
+        l   => pageload
+ */
 
 /* From: http://jquerymobile.com/demos/1.2.0/docs/api/events.html
   by binding to pagebeforecreate, you can manipulate markup before jQuery Mobile's default widgets are auto-initialized. For example, say you want to add data-attributes via JavaScript instead of in the HTML source, this is the event you'd use.
@@ -204,7 +219,7 @@ $( document ).delegate("#top-page", "pageinit", function() {
   evt: the original event that comes from jquery mobile. You can use this to prevent the default behaviour and, for instance, stop a certain page from being removed from the dom during the pageremove event.
 */
 var approuter=new $.mobile.Router([
-	{ "#share[?]id=(\\d+)": {events: "bc", handler: 
+	{ "#share[?]id=(\\d+)": {events: "bs", handler: 
 		function(eventType, matchObj, ui, page, evt) {
           var newView = new App.ShareInfoView({
             model:  App.SHARES.get(matchObj[1])
@@ -213,7 +228,7 @@ var approuter=new $.mobile.Router([
           App.SHARE_INFO_VIEW.show(newView);
   }}},
 	{ "#friend[?]id=(\\d+)": {
-      events: "bc", 
+      events: "bs", 
       handler:   function (eventType, matchObj, ui, page, evt) {
           var newView = new App.FriendInfoView({
             model:  App.FRIENDS.get(matchObj[1])
