@@ -13,7 +13,6 @@ http://stackoverflow.com/questions/12591473/best-way-to-dynamically-create-new-p
 https://github.com/watusi/jquery-mobile-iscrollview#readme
 
 ● Share -> Dialog?
-● Move to git hub...
 
 > List friends & shares 
 - scroll shares left-right Pulse style
@@ -95,6 +94,7 @@ http://stackoverflow.com/questions/8887440/implementing-a-composite-pattern-usin
 -- amount
 -- text
 
+● Move to git hub...
 
 ======  DEV TIPS & NOTES
 
