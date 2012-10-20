@@ -65,7 +65,7 @@ https://github.com/watusi/jquery-mobile-iscrollview#readme
 
 
 ### ● Top
-> Filter Money, Time, Things, Promises
+> Implement Filter: Money, Time, Things, Promises | Given, Received
 
 ### Notifications pop-down
 

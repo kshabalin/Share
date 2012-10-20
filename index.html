@@ -36,8 +36,11 @@
 		<!-- Backbone for our data models... -->
 		<script src="lib/backbone.js"></script>
 		
+		<!-- Marrionette to put it all together nicely... -->
+		<script src="lib/backbone.marionette.js"></script>
+
 		<!-- For date display handling... 
-			This is big (5.6k minified!) so should shrink it perhaps... 
+			This is big (5.6k minified!) so should just grab what we need out of it perhaps... 
 			From: http://momentjs.com/
 		-->
 		<script src="lib/moment.min.js"></script>
@@ -54,7 +57,7 @@
 			<a class="friend-list-item" href="#friend?id={{id}}">
 				<img class="friend-photo" src="{{photo}}"/>
 				<div class="friend-name">{{name}}</div>
-				<ul class="friend-shares"/>
+				<ul id="friend-shares"/>
 			</a>
 		</script>
 		

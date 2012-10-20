@@ -8,8 +8,7 @@
 */
 
 // Set-up the namespace we put everything into...
-// From: http://ricostacruz.com/backbone-patterns/#namespace_convention
-var App = window.App = window.App || {};
+var App = window.App;
 
 /*
   Generates a random word...
@@ -75,11 +74,14 @@ function randomShares() {
 
 // Setup random test data.
 App.Friends.add([
-	{ name: "Bob Smith", photo: 'samples/person/img-001.jpeg', id: idCounter++,shares: randomShares()},
-	{ name: "Foo Barer", photo: 'samples/person/img-002.jpeg', id: idCounter++,shares: randomShares()},
-	{ name: "Hello Worlder", photo: 'samples/person/img-003.jpeg', id: idCounter++,shares: randomShares()},
-	{ name: "Hello Wzxcsdf orlder", photo: 'samples/person/img-004.jpeg', id: idCounter++,shares: randomShares()},
-	{ name: "Foo asdsdf", photo: 'samples/person/img-005.jpeg', id: idCounter++,shares: randomShares()},
-	{ name: "Monetary Ecology", photo: 'samples/person/img-006.jpeg', id: idCounter++,shares: randomShares()},
-	{ name: "New Money", photo: 'samples/person/img-004.jpeg', id: idCounter++,shares: randomShares()}
+	{ name: "Bob Smith", photo: 'samples/person/img-001.jpeg', id: idCounter++,},
+	{ name: "Foo Barer", photo: 'samples/person/img-002.jpeg', id: idCounter++,},
+	{ name: "Hello Worlder", photo: 'samples/person/img-003.jpeg', id: idCounter++,},
+	{ name: "Hello Wzxcsdf orlder", photo: 'samples/person/img-004.jpeg', id: idCounter++,},
+	{ name: "Foo asdsdf", photo: 'samples/person/img-005.jpeg', id: idCounter++,},
+	{ name: "Monetary Ecology", photo: 'samples/person/img-006.jpeg', id: idCounter++,},
+	{ name: "New Money", photo: 'samples/person/img-004.jpeg', id: idCounter++,}
 ]);
+App.Friends.each(function(friend){
+	friend.addShare(randomShares());
+})

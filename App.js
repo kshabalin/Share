@@ -1,16 +1,11 @@
-/*
-	The code for the Share! UI mobile application
-
+﻿/*
+	Main application, views, etc - Share! UI mobile application
 	
-	Requires: jQuery Mobile, Backbone
+	Requires: jQuery Mobile, Backbone, Marionette
 	
 	Copyright (c) 2012 Vorski Imagineering - Victor Vorski
 */
-
-/* Set-up the namespace we put everything into...
- From: http://ricostacruz.com/backbone-patterns/#namespace_convention
-*/
-var App = window.App = window.App || {};
+var App = window.App = window.App || new Backbone.Marionette.Application();
 
 /* Set underscore.js to use moustache style template format.
 
@@ -27,39 +22,16 @@ $(document).bind( "mobileinit", function(event) {
     $.extend($.mobile.zoom, {locked:true,enabled:false});    
 });
 
-/* *******************************************************
-	Class: App.Friend
-
-     Backbone Data model based on example in:
-	 http://documentcloud.github.com/backbone/docs/todos.html
- */
-App.Friend = Backbone.Model.extend({
-     defaults: {
-        name: 'John Doe',
-        photo: 'samples/person/img-006.jpeg',
-        id: 0, // This must be set...
-    },
-    initialize: function(){
-    }
-});
-
-// Currently there can be only one
-var FriendsList =  Backbone.Collection.extend({
-        model: App.Friend
-});
-
-// Create singleton for the friends master-list
-App.Friends = new FriendsList;
 
 /* *******************************************************
-	Class: App.Share
-	
-	This models a share between friends.
+  Class: App.Share
+  
+  This models a share between friends.
 */
 App.Share = Backbone.Model.extend({
     defaults: {
-     	from: null, //Person
-     	to: null, //Person
+      from: null, //Person
+      to: null, //Person
         date: new Date(),
         photo: 'samples/person/img-006.jpeg',
         info: '<i>Description</i>',
@@ -72,79 +44,97 @@ App.Share = Backbone.Model.extend({
 });
 
 /*
+  Collection of shares... 
+*/
+App.ShareCollection  =  Backbone.Collection.extend({
+        model: App.Share
+});
+
+/* *******************************************************
+	Class: App.Friend
+
+     Backbone Data model based on example in:
+	 http://documentcloud.github.com/backbone/docs/todos.html
+ */
+App.Friend = Backbone.Model.extend({
+     defaults: {
+        name: 'John Doe',
+        photo: 'samples/person/img-006.jpeg',
+        id: 0, // This must be set...
+        //shares: Collection of App.Share
+    },
+    initialize: function(){
+      this.set({shares: new App.ShareCollection});
+    },
+    addShare: function(share){
+      this.get("shares").add(share);
+    },
+  });
+
+/*
+	List of friends... 
+*/
+var FriendsList =  Backbone.Collection.extend({
+        model: App.Friend
+});
+
+// Create singleton for the friends master-list
+App.Friends = new FriendsList;
+
+
+/*
 	Because the views depend on templates can only do this stuff after DOM is loaded...
+
+	The view structure is all Marionette.js
+	https://github.com/marionettejs/backbone.marionette
+
 */
 $( document ).delegate("#top-page", "pageinit", function() {
 
-	/* The view for rendering one Friend */
-	App.FriendListItemView = Backbone.View.extend({
-		template:  _.template($('#friend-list-item-template').html()),
-		shareTemplate:  _.template($('#friend-list-item-template-share').html()),
-		tagName:  "li",
-	    initialize: function(){
-	    },
-	    render: function(){
-	    	// Get the model into a format easy to consume by the template... This seems to be the standard pattern... UGH.
-	    	var json = this.model.toJSON();
-	    	json.name = json.name.replace(" ", "<br/>");
-	    		    	
-	    	// Apply underscore template to create our contents...
-	    	var htmlT = this.template(json);
-	        this.$el.html(htmlT);
+	/* The share sub-info in a friend who is in a friend list */
+	App.FriendListItemShareView = Backbone.Marionette.CompositeView.extend(
+	{
+		template: "#friend-list-item-template-share",
+           onRender: function () {
+       },
+	});
 
-			// Put the shares into the display
-	        var self = this;
-	    	var theelem = this.$el.find(".friend-shares");
-	    	var now = moment();
-	    	_.each(
-	    		this.model.get("shares"), 
-	    		function(share){
-	    			var json = share.toJSON();
-	    			json.date = share.get("date").from(now).replace("ago","");
-			        theelem.append(self.shareTemplate(json));
-			    }
-			);
-	        return this;
-	    }
+	/* The view for rendering one Friend In the List of Friends */
+	App.FriendListItemView =Backbone.Marionette.CompositeView.extend(
+	{
+		template:  '#friend-list-item-template',
+		itemView: App.FriendListItemShareView,
+		itemViewContainer: "#friend-shares",
+    tagName : 'li',
+    initialize: function(){
+    // grab the child collection from the parent model
+    // so that we can render the collection as children
+    // of this parent node
+        console.log("intializing", this.model);
+        this.collection = this.model.get("shares");
+    },
 	});
-	
-	/* The view for rendering a list of Friends */	
-    var FriendsListView = Backbone.View.extend({
-    	initialize: function() {
-    	},
-    	render: function() {		            
-            this.$el.listview('refresh');
-    	},
-	    addOne: function(friend) {
-			var view = new App.FriendListItemView({model: friend });
-			var html = view.render().el;
-			this.$el.append(html);
-	    },
-	    addAll: function() {
-	      var self=this;
-	      App.Friends.each(function(friend){self.addOne(friend);});
-	    },
-    	
+
+	/* The view for rendering a List of Friends */	
+    var FriendsListView = Backbone.Marionette.CollectionView.extend({
+    	itemView: App.FriendListItemView,
+       onRender: function () {
+         $(this.el).listview('refresh');
+       },
     });
-    App.FriendsView = new FriendsListView({el: $("#friendlist")});
-	App.FriendsView.addAll();
-	App.FriendsView.render();
-	
-	App.ShareItemView = Backbone.View.extend({
-		template:  _.template($('#share-info-template').html()),
-	    initialize: function(){
-	    },
-	    render: function(){
-	    	// Get the model into a format easy to consume by the template... 
-	    	var json = this.model.toJSON();
-	    		    	
-	    	// Apply underscore template to create our contents...
-	    	var htmlT = this.template(json);
-	        this.$el.html(htmlT);
-	        return this;
-	    }
-	});
-});	        
+
+    App.FriendsView = new FriendsListView({
+    	el: $("#friendlist"),
+    	collection: App.Friends
+
+    });
+
+    App.addInitializer(function() {
+		  App.FriendsView.render();
+   });
+
+App.start();
+});
 
 
 /* ----------- Set up the Router 
