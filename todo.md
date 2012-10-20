@@ -1,7 +1,8 @@
 Share! - UI mockup - TODOs
 ================================================================================
 
-## ======  DEV TIPS & NOTES
+ DEV TIPS & NOTES
+ ------------------------
 
 ### To make the jqmobile header customized...
 http://jquerymobile.com/demos/1.0a3/#docs/toolbars/docs-headers.html
@@ -11,27 +12,22 @@ Last topic in this page:
 "If you need to to create a header that doesn't follow the default configuration, simply wrap your custom styled markup in a container div inside the header container and the plugin won't apply the automatic button logic so you can write custom styles for laying out the content in your header."
 
 ### Backbone book Marrionette chapter...
-    http://addyosmani.github.com/backbone-fundamentals/#marionette
+http://addyosmani.github.com/backbone-fundamentals/#marionette
 
-
- TODOs
-------------------------
-
-### ?set-up on heroku so can do git-push deploys?
 
 ### ?? require.js?
 Should I be using http://requirejs.org/
 
-### ● Person view page
-Set up JQuery mobile router:
-https://github.com/azicchetti/jquerymobile-router#readme
-
-Dynamically create page
-http://stackoverflow.com/questions/12591473/best-way-to-dynamically-create-new-pages-in-jquery-mobile-from-ajaxjson-data
+ TODOs
+------------------------
 
 ### Sort -> Filter pop-up
 -- store sort state...
 -- make button reflect the mutually exclusive selection
+
+### Draw some icons to use for this...
+
+### Beter Display of share
 
 
 ### ● Top
@@ -46,17 +42,15 @@ https://github.com/watusi/jquery-mobile-iscrollview#readme
 
 ###● Share Pop-Up -> Dialog?
 
-> List friends & shares 
-- scroll shares left-right Pulse style
+### scroll shares left-right Pulse style
 
-- share display
+### share info display
 -- from/to...
 -- type
 
 
-
 ### ● Share! create pop-up dialog
--- photo upload
+-- photo upload area
 -- text input
 -- clean-up date input.
 
@@ -73,7 +67,7 @@ https://github.com/watusi/jquery-mobile-iscrollview#readme
 Multilanguage UI... Ideally want to have an all-icon UI though...
 no language whatsoever...
 
-_________________________  done  __________________________
+DONE
 ================================================================================
 
 ##● Top > Sort
@@ -125,4 +119,11 @@ http://stackoverflow.com/questions/8887440/implementing-a-composite-pattern-usin
 -- text
 
 ● Move to git hub...
+
+### ● Person view page
+Set up JQuery mobile router:
+https://github.com/azicchetti/jquerymobile-router#readme
+
+Dynamically create page
+http://stackoverflow.com/questions/12591473/best-way-to-dynamically-create-new-pages-in-jquery-mobile-from-ajaxjson-data
 

@@ -59,7 +59,7 @@ function randomShares() {
 	var startDate = moment();
 	startDate.subtract('days',_.random(0,40));
 	for(; count-->0;){
-		shares.push(new App.Share({
+		shares.push(new App.Model.Share({
 			date: moment(startDate),
 			photo: 	'samples/things/img-00'+(Math.round(1+Math.random()*5))+'.jpeg',
 			info: randomSentence(),

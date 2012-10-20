@@ -48,6 +48,7 @@
         <link rel="stylesheet" href="swatch-s.css" />
 		<script src="App.js"></script>
 		<script src="GenerateDummyData.js"></script>
+		<script src="Views.js"></script>
 		<script src="ShareDialog.js"></script>
     </head>
     
@@ -178,13 +179,14 @@
 		<!--  ----------------- Template for a share detail info pop-up/dialog -->
 			</header>
 		    <div class="content" data-role="content">      
-			<script id="share-info-template" type="text/template">
-				<img class="share-photo" src="{{photo}}"/>
-				<div class="share-amount">{{amount}}</div>
-				<div class="share-info">{{info}}</div>
-				<div class="share-date">{{date}}</div>
-				<div class="share-type share-type-{{type}}"></div>
-			</script>
+		<script id="share-info-template" type="text/template">
+					<img class="share-photo" src="{{photo}}"/>
+					<div class="share-amount">{{amount}}</div>
+					<div class="share-info">{{info}}</div>
+					<div class="share-date">{{date}}</div>
+					<div class="share-type share-type-{{type}}"></div>
+		</script>
+ 		    	
 		    </div>
 		</section>
 
