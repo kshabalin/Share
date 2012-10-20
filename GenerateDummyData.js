@@ -11,13 +11,13 @@
 var App = window.App;
 
 /*
-  Generates a random word...
+  Generates a random word... of maximum length
   From: http://stackoverflow.com/questions/1349404/generate-a-string-of-5-random-characters-in-javascript
 */
-function randomWord() {
+function randomWord(length) {
     var charSet = 'abcdefghijklmnopqrstuvwxyz';
     var randomString = '';
-    var len = _.random(2,7);
+    var len = _.random(2,length+2);
     for (var i = 0; i < len; i++) {
         var randomPoz = Math.floor(Math.random() * charSet.length);
         randomString += charSet.substring(randomPoz,randomPoz+1);
@@ -74,13 +74,13 @@ function randomShares() {
 
 // Setup random test data.
 App.Friends.add([
-	{ name: "Bob Smith", photo: 'samples/person/img-001.jpeg', id: idCounter++,},
-	{ name: "Foo Barer", photo: 'samples/person/img-002.jpeg', id: idCounter++,},
-	{ name: "Hello Worlder", photo: 'samples/person/img-003.jpeg', id: idCounter++,},
-	{ name: "Hello Wzxcsdf orlder", photo: 'samples/person/img-004.jpeg', id: idCounter++,},
-	{ name: "Foo asdsdf", photo: 'samples/person/img-005.jpeg', id: idCounter++,},
-	{ name: "Monetary Ecology", photo: 'samples/person/img-006.jpeg', id: idCounter++,},
-	{ name: "New Money", photo: 'samples/person/img-004.jpeg', id: idCounter++,}
+	{ nameFirst:randomWord(6),nameLast:randomWord(10), photo: 'samples/person/img-001.jpeg', id: idCounter++,},
+	{  nameFirst:randomWord(6),nameLast:randomWord(10), photo: 'samples/person/img-002.jpeg', id: idCounter++,},
+	{ nameFirst:randomWord(6),nameLast:randomWord(10), photo: 'samples/person/img-003.jpeg', id: idCounter++,},
+	{ nameFirst:randomWord(6),nameLast:randomWord(10), photo: 'samples/person/img-004.jpeg', id: idCounter++,},
+	{ nameFirst:randomWord(6),nameLast:randomWord(10), photo: 'samples/person/img-005.jpeg', id: idCounter++,},
+	{ nameFirst:randomWord(6),nameLast:randomWord(10), photo: 'samples/person/img-006.jpeg', id: idCounter++,},
+	{ nameFirst:randomWord(6),nameLast:randomWord(10), photo: 'samples/person/img-004.jpeg', id: idCounter++,}
 ]);
 App.Friends.each(function(friend){
 	friend.addShare(randomShares());

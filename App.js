@@ -58,7 +58,8 @@ App.ShareCollection  =  Backbone.Collection.extend({
  */
 App.Friend = Backbone.Model.extend({
      defaults: {
-        name: 'John Doe',
+        nameFirst: 'John',
+        nameLast: 'Doe',
         photo: 'samples/person/img-006.jpeg',
         id: 0, // This must be set...
         //shares: Collection of App.Share
@@ -91,12 +92,22 @@ App.Friends = new FriendsList;
 */
 $( document ).delegate("#top-page", "pageinit", function() {
 
-	/* The share sub-info in a friend who is in a friend list */
+	/* The share info for a friend who is in a friend list */
 	App.FriendListItemShareView = Backbone.Marionette.CompositeView.extend(
 	{
 		template: "#friend-list-item-template-share",
            onRender: function () {
        },
+    tagName : 'li',
+    attributes: {
+      class:"share-container"
+    },
+    templateHelpers: {
+       now: function(){
+          var now = moment();
+          return this.date.from(now).replace("ago","");
+       }
+}
 	});
 
 	/* The view for rendering one Friend In the List of Friends */
@@ -106,12 +117,12 @@ $( document ).delegate("#top-page", "pageinit", function() {
 		itemView: App.FriendListItemShareView,
 		itemViewContainer: "#friend-shares",
     tagName : 'li',
+
     initialize: function(){
     // grab the child collection from the parent model
     // so that we can render the collection as children
     // of this parent node
-        console.log("intializing", this.model);
-        this.collection = this.model.get("shares");
+    this.collection = this.model.get("shares");
     },
 	});
 
@@ -133,7 +144,7 @@ $( document ).delegate("#top-page", "pageinit", function() {
 		  App.FriendsView.render();
    });
 
-App.start();
+   App.start();
 });
 
 

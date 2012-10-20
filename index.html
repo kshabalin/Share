@@ -56,7 +56,7 @@
 		<script id="friend-list-item-template" type="text/template">
 			<a class="friend-list-item" href="#friend?id={{id}}">
 				<img class="friend-photo" src="{{photo}}"/>
-				<div class="friend-name">{{name}}</div>
+				<div class="friend-name">{{nameFirst}}<br/>{{nameLast}}</div>
 				<ul id="friend-shares"/>
 			</a>
 		</script>
@@ -65,15 +65,13 @@
 		<!--  ----------------- Template for a share item on main page (sub-item of FriendsList Item) -->
 
 		<script id="friend-list-item-template-share" type="text/template">
-			<li class="share-container">
 				<a  href="#share?id={{id}}">
 					<img class="share-photo" src="{{photo}}"/>
 					<div class="share-amount">{{amount}}</div>
 					<div class="share-info">{{info}}</div>
-					<div class="share-date">{{date}}</div>
+					<div class="share-date">{{now()}}</div>
 					<div class="share-type share-type-{{type}}"></div>
 				</a>
-			</li>
 		</script>
 		
 		
