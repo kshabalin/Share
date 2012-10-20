@@ -48,7 +48,7 @@ function randomSentence() {
 	
 	return sentence;
 }
-var idCounter = _.random(0,10000)
+var idCounter = 0;//_.random(0,1000); XXX VV-for debugging.
 
 /*
 	Returns a Javascript array of randomly generated Share objects.
@@ -73,15 +73,15 @@ function randomShares() {
 }
 
 // Setup random test data.
-App.Friends.add([
-	{ nameFirst:randomWord(6),nameLast:randomWord(10), photo: 'samples/person/img-001.jpeg', id: idCounter++,},
-	{  nameFirst:randomWord(6),nameLast:randomWord(10), photo: 'samples/person/img-002.jpeg', id: idCounter++,},
-	{ nameFirst:randomWord(6),nameLast:randomWord(10), photo: 'samples/person/img-003.jpeg', id: idCounter++,},
-	{ nameFirst:randomWord(6),nameLast:randomWord(10), photo: 'samples/person/img-004.jpeg', id: idCounter++,},
-	{ nameFirst:randomWord(6),nameLast:randomWord(10), photo: 'samples/person/img-005.jpeg', id: idCounter++,},
-	{ nameFirst:randomWord(6),nameLast:randomWord(10), photo: 'samples/person/img-006.jpeg', id: idCounter++,},
-	{ nameFirst:randomWord(6),nameLast:randomWord(10), photo: 'samples/person/img-004.jpeg', id: idCounter++,}
+App.FRIENDS.add([
+	{ nameFirst:randomWord(7),nameLast:randomWord(8), photo: 'samples/person/img-001.jpeg', id: idCounter++,},
+	{  nameFirst:randomWord(6),nameLast:randomWord(8), photo: 'samples/person/img-002.jpeg', id: idCounter++,},
+	{ nameFirst:randomWord(3),nameLast:randomWord(8), photo: 'samples/person/img-003.jpeg', id: idCounter++,},
+	{ nameFirst:randomWord(6),nameLast:randomWord(8), photo: 'samples/person/img-004.jpeg', id: idCounter++,},
+	{ nameFirst:randomWord(4),nameLast:randomWord(8), photo: 'samples/person/img-005.jpeg', id: idCounter++,},
+	{ nameFirst:randomWord(6),nameLast:randomWord(8), photo: 'samples/person/img-006.jpeg', id: idCounter++,},
+	{ nameFirst:randomWord(6),nameLast:randomWord(8), photo: 'samples/person/img-004.jpeg', id: idCounter++,}
 ]);
-App.Friends.each(function(friend){
+App.FRIENDS.each(function(friend){
 	friend.addShare(randomShares());
 })

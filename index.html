@@ -75,19 +75,6 @@
 		</script>
 		
 		
-		<!--  ----------------- Template for a share detail info pop-up/dialog -->
-
-		<script id="share-info-template" type="text/template">
-			<li class="share-container">
-				<a  href="#share?id={{id}}">
-					<img class="share-photo" src="{{photo}}"/>
-					<div class="share-amount">{{amount}}</div>
-					<div class="share-info">{{info}}</div>
-					<div class="share-date">{{date}}</div>
-					<div class="share-type share-type-{{type}}"></div>
-				</a>
-			</li>
-		</script>
 
 
         <!-- -----------------  The Top Page   ----------------- --> 
@@ -170,8 +157,14 @@
             <header data-role="header" data-position="fixed" data-theme="s">
             	<a href="#top-page" data-icon="home" data-iconpos="notext"></a>
             	<h1>Your friend...</h1>
+
         	</header>
-            <div class="content" data-role="content">      
+            <div class="content" data-role="content">   
+            <script id="friend-info-template" type="text/template">
+				<img class="friend-photo" src="{{photo}}"/>
+				<div class="friend-name">{{nameFirst}}<br/>{{nameLast}}</div>
+				<ul id="friend-shares"/>
+			</script>   
             </div>
         </section>
 
@@ -181,9 +174,17 @@
 		<section id="share" data-role="dialog" data-theme="s">
 		    <header data-role="header" data-position="fixed" data-theme="s">
 		    	<a href="#top-page" data-icon="home" data-iconpos="notext"></a>
-		    	<h1>Share!</h1>
+		    	<h1>A Share!</h1>
+		<!--  ----------------- Template for a share detail info pop-up/dialog -->
 			</header>
 		    <div class="content" data-role="content">      
+			<script id="share-info-template" type="text/template">
+				<img class="share-photo" src="{{photo}}"/>
+				<div class="share-amount">{{amount}}</div>
+				<div class="share-info">{{info}}</div>
+				<div class="share-date">{{date}}</div>
+				<div class="share-type share-type-{{type}}"></div>
+			</script>
 		    </div>
 		</section>
 

@@ -43,12 +43,17 @@ App.Share = Backbone.Model.extend({
     }
 });
 
-/*
-  Collection of shares... 
-*/
-App.ShareCollection  =  Backbone.Collection.extend({
-        model: App.Share
+/* *******************************************************
+  Class: App.ShareCollection
+
+  A collection of shares...
+ */
+ App.ShareCollection  =  Backbone.Collection.extend({
+     model: App.Share
 });
+
+// Create singleton for the shares master-list
+App.SHARES = new App.ShareCollection;
 
 /* *******************************************************
 	Class: App.Friend
@@ -69,18 +74,21 @@ App.Friend = Backbone.Model.extend({
     },
     addShare: function(share){
       this.get("shares").add(share);
+      App.SHARES.add(share);
     },
   });
 
-/*
-	List of friends... 
-*/
+/* *******************************************************
+  Class: App.FriendsList
+
+  List of friends...
+ */
 var FriendsList =  Backbone.Collection.extend({
         model: App.Friend
 });
 
 // Create singleton for the friends master-list
-App.Friends = new FriendsList;
+App.FRIENDS = new FriendsList;
 
 
 /*
@@ -92,22 +100,27 @@ App.Friends = new FriendsList;
 */
 $( document ).delegate("#top-page", "pageinit", function() {
 
-	/* The share info for a friend who is in a friend list */
-	App.FriendListItemShareView = Backbone.Marionette.CompositeView.extend(
-	{
-		template: "#friend-list-item-template-share",
-           onRender: function () {
-       },
-    tagName : 'li',
-    attributes: {
-      class:"share-container"
-    },
+  // ======================= GENERIC BASE CLASSES =============
+  App.ShareViewBase = Backbone.Marionette.ItemView.extend(
+  {
     templateHelpers: {
        now: function(){
           var now = moment();
           return this.date.from(now).replace("ago","");
        }
 }
+  });
+
+  // ======================= LIST RELATED VIEW ==================
+
+	/* The share info for a friend who is in a friend list */
+	App.FriendListItemShareView =  App.ShareViewBase.extend(
+	{
+		template: "#friend-list-item-template-share",
+    tagName : 'li',
+    attributes: {
+      class:"share-container"
+    },
 	});
 
 	/* The view for rendering one Friend In the List of Friends */
@@ -119,10 +132,10 @@ $( document ).delegate("#top-page", "pageinit", function() {
     tagName : 'li',
 
     initialize: function(){
-    // grab the child collection from the parent model
-    // so that we can render the collection as children
-    // of this parent node
-    this.collection = this.model.get("shares");
+      // grab the child collection from the parent model
+      // so that we can render the collection as children
+      // of this parent node
+      this.collection = this.model.get("shares");
     },
 	});
 
@@ -134,17 +147,41 @@ $( document ).delegate("#top-page", "pageinit", function() {
        },
     });
 
-    App.FriendsView = new FriendsListView({
+    App.FRIENDS_LIST_VIEW = new FriendsListView({
     	el: $("#friendlist"),
-    	collection: App.Friends
+    	collection: App.FRIENDS
 
     });
 
+
+    // ========================= FRIEND INFO POPUP/DIALOG VIEWS =============
+    App.FriendInfoView = Backbone.Marionette.CompositeView.extend({
+          template:  '#friend-info-template',
+        itemView: App.FriendListItemShareView,
+        tagName : 'div',
+        initialize: function(){
+           this.collection = this.model.get("shares");
+        }
+      });
+
+    // ========================= SHARE INFO POPUP/DIALOG VIEWS =============
+    App.ShareInfoView =  App.ShareViewBase.extend(
+    {
+      template: "#share-info-template",
+      tagName : 'div',
+    });
+
+    // ========================= GET IT ALL GOING... BOOTSTRAP ============
     App.addInitializer(function() {
-		  App.FriendsView.render();
+		  App.FRIENDS_LIST_VIEW.render();  
    });
 
-   App.start();
+    App.FRIEND_INFO_VIEW = new Backbone.Marionette.Region({
+      el: "#friend .content"
+    });
+    App.SHARE_INFO_VIEW = new Backbone.Marionette.Region({
+      el: "#share .content"
+    });   App.start(); 
 });
 
 
@@ -169,7 +206,19 @@ $( document ).delegate("#top-page", "pageinit", function() {
 var approuter=new $.mobile.Router([
 	{ "#share[?]id=(\\d+)": {events: "bc", handler: 
 		function(eventType, matchObj, ui, page, evt) {
-			console.log("hello share","eventType=",eventType, "id=",matchObj[1], "ui=", ui, "page=", page, "evt=", evt); }} 
-		},
-	{ "#friend(?:[?](.*))?": {events: "bc", handler: function () {console.log("hello friend"); }} } 
+          var newView = new App.ShareInfoView({
+            model:  App.SHARES.get(matchObj[1])
+          });
+          console.log("share view", newView);
+          App.SHARE_INFO_VIEW.show(newView);
+  }}},
+	{ "#friend[?]id=(\\d+)": {
+      events: "bc", 
+      handler:   function (eventType, matchObj, ui, page, evt) {
+          var newView = new App.FriendInfoView({
+            model:  App.FRIENDS.get(matchObj[1])
+          });
+          console.log("friend view", newView);
+          App.FRIEND_INFO_VIEW.show(newView);
+  }}} 
 ]);
