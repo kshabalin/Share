@@ -1,5 +1,5 @@
 ﻿/*
-	Main application, views, etc - Share! UI mobile application
+	Views - Share! mobile application
 	
 	Requires: jQuery Mobile, Marionette, App.js
 	
@@ -23,6 +23,47 @@ $(document).bind( "mobileinit", function(event) {
     $.extend($.mobile.zoom, {locked:true,enabled:false});    
 });
 
+/* The Filter is a model but it's for view-side only so we're declaring it here */
+var FilterModel =  Backbone.Model.extend({
+    defaults: {
+      received: true,
+      given: true,
+      time: true,
+      things: true,
+      money:true,
+      promises: true
+    },
+});
+App.FILTER = new FilterModel;
+
+/*
+  Because the views depend on templates can only do this stuff after DOM is loaded...
+
+  The view structure is all Marionette.js
+  https://github.com/marionettejs/backbone.marionette
+
+*/
+$( document ).delegate("#top-page", "pagebeforecreate", function() {
+
+      // ======================= LIST FILTER =============
+    App.View.Filter = Backbone.Marionette.ItemView.extend({
+        template:  '#filter-template',
+        tagName : 'div',
+        onRender: function () {
+              // kick jQuery Mobile so it will decorate this
+            // $(this.el).page();
+        },
+
+    });
+     App.View.FILTER = new App.View.Filter({
+    el: $("#the-filters"),
+    tagName: "div",
+    model: App.FILTER
+  });
+ 
+      App.View.FILTER.render();  
+
+});
 /*
 	Because the views depend on templates can only do this stuff after DOM is loaded...
 
@@ -31,8 +72,9 @@ $(document).bind( "mobileinit", function(event) {
 
 */
 $( document ).delegate("#top-page", "pageinit", function() {
-
   // ======================= GENERIC BASE CLASSES =============
+
+  /* Set-up the basic decorators for shares... */
   App.View.ShareBase = Backbone.Marionette.ItemView.extend(
   {
     templateHelpers: {
@@ -75,16 +117,15 @@ $( document ).delegate("#top-page", "pageinit", function() {
     var FriendsListView = Backbone.Marionette.CollectionView.extend({
     	itemView: App.View.FriendListItem,
        onRender: function () {
+          // kick jQuery Mobile so it will decorate the list.
          $(this.el).listview('refresh');
        },
     });
 
-    App.FRIENDS_LIST_VIEW = new FriendsListView({
+    App.View.FRIENDS = new FriendsListView({
     	el: $("#friendlist"),
     	collection: App.FRIENDS
-
     });
-
 
     // ========================= FRIEND INFO POPUP/DIALOG VIEWS =============
     App.View.FriendInfo = Backbone.Marionette.CompositeView.extend({
@@ -105,9 +146,11 @@ $( document ).delegate("#top-page", "pageinit", function() {
 
     // ========================= GET IT ALL GOING... BOOTSTRAP ============
     App.addInitializer(function() {
-		  App.FRIENDS_LIST_VIEW.render();  
+		  App.View.FRIENDS.render();  
    });
-
+    /* Create the marionette views for managing the Friend, Share info dialogs. 
+       https://github.com/marionettejs/backbone.marionette/blob/master/docs/marionette.view.md
+    */
     App.FRIEND_INFO_VIEW = new Backbone.Marionette.Region({
       el: "#friend .content"
     });
@@ -119,8 +162,8 @@ $( document ).delegate("#top-page", "pageinit", function() {
 
 // ==================  Set up the ROUTER =================== 
 /* 
+   Info on jQuery mobile events:
    From: http://jquerymobile.com/demos/1.2.0/docs/api/events.html
-  by binding to pagebeforecreate, you can manipulate markup before jQuery Mobile's default widgets are auto-initialized. For example, say you want to add data-attributes via JavaScript instead of in the HTML source, this is the event you'd use.
   
   Using: https://github.com/azicchetti/jquerymobile-router#readme
   Please refer to the following schema to understand event codes (it's really straightforward)

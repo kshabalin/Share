@@ -1,5 +1,5 @@
 ﻿/*
-	Main application, views, etc - Share! UI mobile application
+	Main application set-up & Models - Share!  mobile application
 	
 	Requires: jQuery Mobile, Backbone, Marionette
 	
@@ -24,8 +24,6 @@ App.Model.Share = Backbone.Model.extend({
         amount: 99,
         id: 0 // This must be set...
     },
-    initialize: function(){
-    }
 });
 
 /* *******************************************************

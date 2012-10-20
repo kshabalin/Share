@@ -52,31 +52,7 @@
 		<script src="ShareDialog.js"></script>
     </head>
     
-    <body>        
-		<!-- ----------------- Template for a list item in the list of Friends -->
-		<script id="friend-list-item-template" type="text/template">
-			<a class="friend-list-item" href="#friend?id={{id}}">
-				<img class="friend-photo" src="{{photo}}"/>
-				<div class="friend-name">{{nameFirst}}<br/>{{nameLast}}</div>
-				<ul id="friend-shares"/>
-			</a>
-		</script>
-		
-
-		<!--  ----------------- Template for a share item on main page (sub-item of FriendsList Item) -->
-
-		<script id="friend-list-item-template-share" type="text/template">
-				<a  href="#share?id={{id}}">
-					<img class="share-photo" src="{{photo}}"/>
-					<div class="share-amount">{{amount}}</div>
-					<div class="share-info">{{info}}</div>
-					<div class="share-date">{{now()}}</div>
-					<div class="share-type share-type-{{type}}"></div>
-				</a>
-		</script>
-		
-		
-
+    <body>       		
 
         <!-- -----------------  The Top Page   ----------------- --> 
         
@@ -88,26 +64,49 @@
 			</header>
             <div class="content" data-role="content">      
                 <ul id="friendlist" data-role="listview"/>
+                <script id="friend-list-item-template" type="text/template">
+					<a class="friend-list-item" href="#friend?id={{id}}">
+					<img class="friend-photo" src="{{photo}}"/>
+					<div class="friend-name">{{nameFirst}}<br/>{{nameLast}}</div>
+					<ul id="friend-shares"/>
+					</a>
+				</script>
+				<script id="friend-list-item-template-share" type="text/template">
+					<a  href="#share?id={{id}}">
+						<img class="share-photo" src="{{photo}}"/>
+						<div class="share-amount">{{amount}}</div>
+						<div class="share-info">{{info}}</div>
+						<div class="share-date">{{now()}}</div>
+						<div class="share-type share-type-{{type}}"></div>
+					</a>
+				</script>
             </div>
             <footer data-role="footer" data-position="fixed" data-theme="s">
 	            <a href="#share-dialog" data-role="button" 
 	            id="share-button" data-rel="popup" data-inline="true" data-theme="s" >Share!</a>
             </footer>
+
+
+        <!-- -----------------  Filter setting pop-up   ----------------- --> 
             <div data-role="popup" id="filter-selector"  data-theme="s">
+            	<div id="the-filters">
+            <script id="filter-template" type="text/template">
 				<div id="filter-type-select" data-role="fieldcontain" >
 				    <fieldset data-role="controlgroup">
 				
 					<label><input type="checkbox" name="FilterType:Time" />Time</label>
-					<label><input type="checkbox" name="FilterType:Time" />Things</label>
-					<label><input type="checkbox" name="FilterType:Time" />Money</label>
-					<label><input type="checkbox" name="FilterType:Time" />Promises</label>
+					<label><input type="checkbox" name="FilterType:Things" />Things</label>
+					<label><input type="checkbox" name="FilterType:Money" />Money</label>
+					<label><input type="checkbox" name="FilterType:Promises" />Promises</label>
 					</fieldset>
 				</div>					
 				<div id="filter-type-select" data-role="fieldcontain" >
 				    <fieldset data-role="controlgroup">
-					<label><input type="checkbox" name="FilterType:Time" />Given</label>
-					<label><input type="checkbox" name="FilterType:Time" />Received</label>
+					<label><input type="checkbox" name="FilterType:Given" />Given</label>
+					<label><input type="checkbox" name="FilterType:Received" />Received</label>
 				</fieldset>
+			</script>
+				</div>
 		    </div>
 		    
 		    
