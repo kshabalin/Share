@@ -87,7 +87,7 @@ Triggered on the page being initialized, after initialization occurs. We recomme
     templateHelpers: {
        now: function(){
           var now = moment();
-          return this.date.from(now).replace("ago","");
+          return moment(this.date).from(now).replace("ago","");
        }
 }
   });
@@ -131,7 +131,7 @@ Triggered on the page being initialized, after initialization occurs. We recomme
 
     App.View.FRIENDS = new FriendsListView({
     	el: $("#friendlist"),
-    	collection: App.FRIENDS
+    	collection: App.Model.ME.get("friends"),
     });
 
     // ========================= FRIEND INFO POPUP/DIALOG VIEWS =============

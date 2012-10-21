@@ -95,28 +95,31 @@ App.Model.Friend = Backbone.Model.extend({
     },
     addShare: function(share){
       this.get("shares").add(share);
-      App.Model.ME.addShare(share);
     },
   });
 
 /* *******************************************************
-  Class: App.Model.Me
-
-    I am a kind of friend, yet so much more...
- */
-App.Model.Me = App.Model.Friend.extend({
-    initialize: function(){
-      this.set({friends: new App.Model.Friends});
-    },
-});
-// This is the singleton describing me... This has to be set in the data initialization somewehere..
-App.Model.ME = null;
-
-/* *******************************************************
-  Class: FriendsList
+  Class: App.Model.Friends - a collection of friends
 
   List of friends...
  */
 App.Model.Friends =  Backbone.Collection.extend({
-        model: App.Model.Friend
+    model: App.Model.Friend
 });
+
+/* *******************************************************
+  Class: App.Model.Me
+
+    I am a Friend, yet so much more...
+ */
+App.Model.Me = App.Model.Friend.extend({
+	defaults: {
+    	friends: new App.Model.Friends,
+    },
+    addFriend: function(friend){
+      this.get("friends").add(friend);
+    },
+
+});
+// This is the singleton describing me... This has to be set in the data initialization somewehere..
+App.Model.ME = null;

@@ -80,10 +80,11 @@ function randomShares(friend) {
 	return shares;
 }
 
-App.Model.ME = new App.Model.Me;
+App.Model.ME = new App.Model.Me(
+{ nameFirst:"Iam a",nameLast:"Bigsharer", photo: 'samples/person/img-001.jpeg', id: idCounter++,});
 
 // Setup random test data.
-App.Model.ME.get("friends").add([
+App.Model.ME.addFriend([
 	{ nameFirst:randomWord(7),nameLast:randomWord(8), photo: 'samples/person/img-001.jpeg', id: idCounter++,},
 	{  nameFirst:randomWord(6),nameLast:randomWord(8), photo: 'samples/person/img-002.jpeg', id: idCounter++,},
 	{ nameFirst:randomWord(3),nameLast:randomWord(8), photo: 'samples/person/img-003.jpeg', id: idCounter++,},
@@ -95,6 +96,8 @@ App.Model.ME.get("friends").add([
 
 // Set-up random shares
 App.Model.ME.get("friends").each(function(friend){
-	friend.addShare(randomShares(friend));
+	var share = randomShares(friend);
+    App.Model.ME.addShare(share);
+	friend.addShare(share);
 });
 
