@@ -53,27 +53,37 @@ var idCounter = 0;//_.random(0,1000); XXX VV-for debugging.
 /*
 	Returns a Javascript array of randomly generated Share objects.
 */
-function randomShares() {
+function randomShares(friend) {
 	var shares = [];
 	var count = _.random(1,5);
 	var startDate = moment();
 	startDate.subtract('days',_.random(0,40));
 	for(; count-->0;){
-		shares.push(new App.Model.Share({
+		var newShare = new App.Model.Share({
 			date: moment(startDate),
 			photo: 	'samples/things/img-00'+(Math.round(1+Math.random()*5))+'.jpeg',
 			info: randomSentence(),
 			type: 'money',
 			amount: _.random(0,100),
-			id: idCounter++
-		}));
+			id: idCounter++,
+			toPerson: null,
+			fromPerson: null,
+		});
+		if(_.random(0,1)) {
+			newShare.set("toPerson", friend);
+		} else {
+			newShare.set("fromPerson", friend);
+		}
+		shares.push(newShare);
 		startDate.subtract('days',_.random(10,220));
 	}	
 	return shares;
 }
 
+App.Model.ME = new App.Model.Me;
+
 // Setup random test data.
-App.FRIENDS.add([
+App.Model.ME.get("friends").add([
 	{ nameFirst:randomWord(7),nameLast:randomWord(8), photo: 'samples/person/img-001.jpeg', id: idCounter++,},
 	{  nameFirst:randomWord(6),nameLast:randomWord(8), photo: 'samples/person/img-002.jpeg', id: idCounter++,},
 	{ nameFirst:randomWord(3),nameLast:randomWord(8), photo: 'samples/person/img-003.jpeg', id: idCounter++,},
@@ -82,6 +92,9 @@ App.FRIENDS.add([
 	{ nameFirst:randomWord(6),nameLast:randomWord(8), photo: 'samples/person/img-006.jpeg', id: idCounter++,},
 	{ nameFirst:randomWord(6),nameLast:randomWord(8), photo: 'samples/person/img-004.jpeg', id: idCounter++,}
 ]);
-App.FRIENDS.each(function(friend){
-	friend.addShare(randomShares());
-})
+
+// Set-up random shares
+App.Model.ME.get("friends").each(function(friend){
+	friend.addShare(randomShares(friend));
+});
+

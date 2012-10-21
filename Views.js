@@ -29,9 +29,10 @@ var FilterModel =  Backbone.Model.extend({
       received: "checked",
       given: "checked",
       time: "checked",
-      things: null,
+      thing: "checked",
       money: "checked",
-      promises: null
+      promise: "checked",
+      returned: null
     },
 });
 App.FILTER = new FilterModel;
