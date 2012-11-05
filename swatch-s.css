@@ -5,18 +5,7 @@
 	Copyright (c) 2012 Vorski Imagineering - Victor Vorski
 */
 
-/* ===================== Theme... ===================== */
-
-.ui-icon-sort-name {
-	background-image: url("images/112-group.png");
-}
-.ui-icon-sort-recent {
-	background-image: url("images/11-clock.png");
-}
-.ui-icon-sort-shuffle {
-	background-image: url("images/05-shuffle.png");
-}
-
+/* ===================== Theme copied over from existing theme... ===================== */
 .ui-listview li.ui-btn {
 	background: transparent;
 }
@@ -42,10 +31,13 @@
 }
 
 
-.ui-body-s .ui-title, .ui-body-s .ui-footer {
+.ui-body-s .ui-title {
 		background-image: url(images/Grungy.jpeg);
 }
 
+.ui-body-s .ui-footer {
+	background: transparent;
+}
 .ui-btn-inner { 
 	/*font-size: 13px; */
 	padding: .2em 20px; min-width: .55em; 	
@@ -90,7 +82,7 @@
 	background-image: url(images/petals.jpeg);
 }
 .ui-overlay-s {
-	background-image: none;
+	background-image: url(images/petals.jpeg);
 	border-width: 0;
 }
 .ui-body-s,
@@ -118,40 +110,23 @@
 }
 
 .ui-shadow, .ui-overlay-shadow {
-	-webkit-box-shadow: 3px 3px 0px rgba(50, 50, 50, 0.39);
-	-moz-box-shadow:    3px 3px 0px rgba(50, 50, 50, 0.39);
-	box-shadow:         3px 3px 0px rgba(50, 50, 50, 0.39);
+	-webkit-box-shadow: none;
+	-moz-box-shadow:    none;
+	box-shadow:         none;
 }
 
 .ui-btn-corner-all, .ui-corner-all {
-	-moz-border-radius: 				2px /*{global-radii-buttons}*/;
-	-webkit-border-radius: 				2px /*{global-radii-buttons}*/;
-	border-radius: 						2px /*{global-radii-buttons}*/;
+	-moz-border-radius: 				0px /*{global-radii-buttons}*/;
+	-webkit-border-radius: 				0px /*{global-radii-buttons}*/;
+	border-radius: 						0px /*{global-radii-buttons}*/;
 }
 
-.ui-btn-up-s, .ui-btn-hover-s, .ui-btn-down-s {
-	background: 			#eee /*{c-bup-background-solor}*/;
-		background-image: url(images/Grungy.jpeg);
-		background-position: -40px -20px;
-	/*font-weight: bold;*/
-	color: 					#222 /*{c-bup-solor}*/;
-	text-shadow: 0 /*{c-bup-shadow-x}*/ 1px /*{c-bup-shadow-y}*/ 0 /*{c-bup-shadow-radius}*/ #fff /*{c-bup-shadow-solor}*/;
+.ui-btn-up-s, .ui-btn-hover-s {
+	background: 			transparent; /*{c-bup-background-solor}*/;
+	border: 0px;
 }
 
-/*
-.ui-btn-hover-s, .ui-btn-down-s  {
-	-moz-box-shadow:inset 0px 0px 3px 3px #35ed4d;
-	-webkit-box-shadow:inset 0px 0px 3px 3px #35ed4d;
-	box-shadow:inset 0px 0px 3px 3px #35ed4d;
-}
-
-.ui-btn-down-s {
-	-moz-box-shadow:inset 0px 0px 3px 3px #222;
-	-webkit-box-shadow:inset 0px 0px 3px 3px #222;
-	box-shadow:inset 0px 0px 3px 3px #222;
-}*/
-
-.ui-btn-up-s {
+.ui-down-up-s {
 	border: 1px solid 		#ccc /*{c-bup-border}*/;
 }
 .ui-btn-up-s:visited,
@@ -159,8 +134,6 @@
 	color: 					#2f3e46 /*{c-bup-solor}*/;
 }
 .ui-btn-hover-s {
-	border: 1px solid 		#bbb /*{c-bhover-border}*/;
-	/*font-weight: bold;*/
 }
 .ui-btn-hover-s:visited,
 .ui-btn-hover-s:hover,
@@ -188,44 +161,55 @@
 }
 
 
-/* ===================== Our item styling... ===================== */
+/* =====================  #top-page 
+   the app jQM top page ===================== */
 
-// --------- The header
+
+/* ------------------  #top-page header  
+   items inside the header ------------------ */
 #top-page-header h1 {
-	display: inline;
+	isplay: inline;
 	font-size: 1em;
+	height: 50px;
 }
 
-
-// ---------  Buttons and such 
-#share-dialog-screen {
-	background-color: black;
+#filter-button {
+	background: transparent;
+	background-image: url("images/filter-button.png");
+	height: 59px;
+	width: 68px;	
 }
 
-#share-dialog .ui-content{
-	padding: 0px;
-		width: 100%;
-
+#menu-button {
+	background: transparent;
+	background-image: url("images/menu-button.png");
+	height: 59px;
+	width: 68px;	
 }
 
-// ---------  The sort selection button on the main page 
-#sort-select {
-	margin: 0px;
+/* ------------------  #top-page footer  
+   related to the footer  ------------------ */
+#top-page footer {
+background: transparent;
+	height:0px;
+	border: 0px;
+	  margin-left: auto ;
+  margin-right: auto ;
 }
 
-#sort-select .ui_btn {
-	-moz-border-radius: 				0px /*{global-radii-buttons}*/;
-	-webkit-border-radius: 				0px /*{global-radii-buttons}*/;
-	border-radius: 						0px /*{global-radii-buttons}*/;
-
-}
 #share-button {
 	margin: 0 auto;
-	background-image: url("images/petals.jpeg");
-	background-position: 40px 40px;
+	background: transparent;
+	background-image: url("images/share-button.png");
+	height: 100px;
+	width: 188px;
+	position: absolute;
+	margin: 0px auto;
+	bottom: 0px;
 }
 
-// ---------  Things related to our List of friends...
+/* ---------  #top-page #friend-share 
+	List of friends displayed on top page ...  */
 .friend-list-item {
 	position: relative;
 	display:  block;
@@ -235,9 +219,10 @@
 	overflow: hidden;
 }
 
-#friendlist a.ui-link-inherit {
+.friend-list a.ui-link-inherit {
 	padding: 0;
 }
+
 .friend-name,
 .friend-photo {
 	position: absolute;
@@ -256,15 +241,20 @@
 	left: 0px;
 	top: 0px;	
 }
+
+.friend-list>li{
+	border-bottom: 1px solid black;	
+}
 #friend-shares {
 	display: block;
 	height: 5em;
 	margin: 0;
-	margin-left: 6em;
 	padding: 0;
+	margin-left: 5.5em;
 	overflow: hidden;
 }
 
+/* container for shares listed inside a friend list view */
 .share-container {
 	position: relative;
 	display: inline;
@@ -273,7 +263,7 @@
 	height: 4em;
 	width: 8em;
 	overflow: hidden;
-	margin: 0.5em 0.7em;
+	margin: 0.2em 0.4em;
 
 	-webkit-border-radius: 4px;
 	border-radius: 4px;
@@ -284,7 +274,8 @@
 .share-amount, 
 .share-date, 
 .share-type,
-.share-info  {
+.share-info,
+.share-to-from  {
 	position: absolute;
 	font-size: 0.7em;
 	text-overflow: hidden;
@@ -318,6 +309,27 @@
 	top: 0em;
 }
 
+.share-to-from{
+	height: 4em;
+	width: 6em;
+	right: 4em;
+	top: 4em;
+	text-align: right;
+}
+
 .share-photo {
 	max-height: 5em;
+}
+
+
+/* =====================  #share-dialog 
+   pop-up for creating a share ===================== */
+
+#share-dialog-screen {
+	background-color: black;
+}
+
+#share-dialog .ui-content{
+	padding: 0px;
+	width: 100%;
 }

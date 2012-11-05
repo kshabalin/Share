@@ -33,10 +33,8 @@ function randomDate(start, end) {
     return moment(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
 }
 
-/*
-  Generates a random sentence...
-  (can be empty)
-  
+/*  Generates a random sentence...
+  (can be empty)  
 */
 function randomSentence() {
 	var sentence = "";
@@ -48,7 +46,20 @@ function randomSentence() {
 	
 	return sentence;
 }
-var idCounter = 0;//_.random(0,1000); XXX VV-for debugging.
+
+var sharetypes = ['money','time','thing','promise'];
+
+function randomShareType() {
+	return sharetypes[_.random(0,3)];
+}
+
+var tofromfypes = ['given','received'];
+
+function randomToFromType() {
+	return tofromfypes[_.random(0,1)];
+}
+// We need all entities having unique IDs... but maybe Backbone can set this!? - need to investigate more.
+var idCounter = 0;
 
 /*
 	Returns a Javascript array of randomly generated Share objects.
@@ -63,15 +74,18 @@ function randomShares(friend) {
 			date: moment(startDate),
 			photo: 	'samples/things/img-00'+(Math.round(1+Math.random()*5))+'.jpeg',
 			info: randomSentence(),
-			type: 'money',
+			type: randomShareType(),
 			amount: _.random(0,100),
 			id: idCounter++,
+			tofrom: randomToFromType(),
 			toPerson: null,
 			fromPerson: null,
 		});
 		if(_.random(0,1)) {
 			newShare.set("toPerson", friend);
+			newShare.set("fromPerson", App.Model.ME);
 		} else {
+			newShare.set("toPerson", App.Model.ME);
 			newShare.set("fromPerson", friend);
 		}
 		shares.push(newShare);
@@ -100,4 +114,5 @@ App.Model.ME.get("friends").each(function(friend){
     App.Model.ME.addShare(share);
 	friend.addShare(share);
 });
+
 

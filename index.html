@@ -1,14 +1,14 @@
 <!DOCTYPE HTML>
 <html>
+    <head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+       <!-- <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scaleable=no">-->
+	   <meta id="extViewportMeta" name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
 <!-- 
 	Share! mobile application
 
 	Copyright (c) 2012 Vorski Imagineering - Victor Vorski
--->
-    <head>
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scaleable=no">
-        
+-->        
 	    <title>Share!</title>
  
 	 	<link href='http://fonts.googleapis.com/css?family=Rock+Salt' rel='stylesheet' type='text/css'>
@@ -45,45 +45,69 @@
 		-->
 		<script src="lib/moment.min.js"></script>
 
-        <link rel="stylesheet" href="swatch-s.css" />
+        	<link rel="stylesheet" href="swatch-s.css" />
 		<script src="App.js"></script>
 		<script src="GenerateDummyData.js"></script>
 		<script src="Views.js"></script>
 		<script src="ShareDialog.js"></script>
+		<script src="InfoPopupViews.js"></script>
+
+		<script src="js/jquery.animate-enhanced.min.js"></script>
+		<script src="js/jqm.globals.js"></script>
+		<link rel="stylesheet" href="jqm.slidemenu.css" />
+		<script src="js/jqm.slidemenu.js"></script>
+
+		<script src="js/iscroll.js"></script>
+	  	<script src="js/jquery.mobile.iscrollview.js"></script>
+		
     </head>
     
     <body>       		
 
-        <!-- -----------------  The Top Page   ----------------- --> 
+
+	<!-- ======================  Menu    --> 
+	<div id="slidemenu">
+		<h3>MENU</h3>
+		<ul>
+			<li><a href="#main_page">Home</a></li>
+			<li><a href="#another_page">Tegan Snyder</a></li>
+			<li><a href="#another_page2">Invite Friends</a></li>
+			<li><a href="#another_page3">Settings</a></li>
+			<li><a href="test.html" rel="external">Help</a></li>
+		</ul>
+	</div>
+        <!-- ======================  The Top Page    --> 
         
         <section id="top-page" data-role="page" data-theme="s">
             <header data-role="header" data-position="fixed" data-theme="s">
-            	<a href="#top-page" data-icon="home" data-iconpos="notext"></a>
+            	<a id="menu-button" data-slidemenu="#slidemenu" data-slideopen="false" href="#" class="showMenu" ></a>
             	<h1>Share!</h1>
-				<a href="#filter-selector" data-rel="popup" data-theme="s">▼</a>
+				<a id="filter-button" href="#filter-selector" data-rel="popup" ></a>
 			</header>
-            <div class="content" data-role="content">      
-                <ul id="friendlist" data-role="listview"/>
-                <script id="friend-list-item-template" type="text/template">
-					<a class="friend-list-item" href="#friend?id={{id}}">
-					<img class="friend-photo" src="{{photo}}"/>
-					<div class="friend-name">{{nameFirst}}<br/>{{nameLast}}</div>
-					<ul id="friend-shares"/>
-					</a>
-				</script>
-				<script id="friend-list-item-template-share" type="text/template">
-					<a  href="#share?id={{id}}">
-						<img class="share-photo" src="{{photo}}"/>
-						<div class="share-amount">{{amount}}</div>
-						<div class="share-info">{{info}}</div>
-						<div class="share-date">{{now()}}</div>
-						<div class="share-type share-type-{{type}}"></div>
-					</a>
-				</script>
+            <div class="content" data-role="content" data-iscroll>
+            	<div class="friend-list-container">
+	                <script id="friend-list-item-template" type="text/template">
+						<a class="friend-list-item" href="#friend?id={{id}}">
+						<img class="friend-photo" src="{{photo}}"/>
+						<div class="friend-name">{{nameFirst}}<br/>{{nameLast}}</div>
+						<ul id="friend-shares"/>
+						</a>
+					</script>
+					<script id="friend-list-item-template-share" type="text/template">
+						<a  href="#share?id={{id}}">
+							<img class="share-photo" src="{{photo}}"/>
+							<div class="share-amount">{{amount}}</div>
+							<div class="share-info">{{type}} {{info}}</div>
+							<div class="share-to-from">{{tofrom}}</div>
+							<div class="share-date">{{sinceNow()}}</div>
+							<div class="share-type share-type-{{type}}"></div>
+						</a>
+					</script>
+            	</div>
             </div>
-            <footer data-role="footer" data-position="fixed" data-theme="s">
-	            <a href="#share-dialog" data-role="button" 
-	            id="share-button" data-rel="popup" data-inline="true" data-theme="s" >Share!</a>
+            <footer data-role="footer" data-position="fixed" data-tap-toggle="false"  data-theme="s">
+	            <a id="share-button" href="#share-dialog" data-role="button" 
+	             data-rel="popup" data-inline="true" data-theme="s" ></a>
             </footer>
 
 
@@ -108,7 +132,7 @@
 				</div>
 				<div id="filter-type-select" data-role="fieldcontain" >
 				    <fieldset data-role="controlgroup">
-					<label><input type="checkbox" name="returned" {{returned}}/>Returned</label>
+					<label><input type="checkbox" disabled name="returned" {{returned}}/>Returned</label>
 				</fieldset>
 				</div>
 			</script>
@@ -116,8 +140,7 @@
 		    </div>
 		    
 		    
-		    <!-- ----------------- Create New Share Pop-Up ----------------- --> 
-		    
+		    <!-- ----------------- Create New Share Pop-Up ----------------- --> 	    
 		    <div id="share-dialog" data-role="popup" data-position-to="window" data-tolerance ="2">
 	            <div class="content" data-role="content">
 	            	<header data-role="header"  data-theme="s">
@@ -157,7 +180,7 @@
         </section>
         
         
-		<!-- ----------------- Page to show all info about one friend ----------------- --> 
+		<!--  ======================  Page to show all info about one friend --> 
 
         <section id="friend" data-role="dialog" data-theme="s">
             <header data-role="header" data-position="fixed" data-theme="s">
@@ -175,23 +198,21 @@
         </section>
 
 
-		<!-- ----------------- Page to show all info about one share ----------------- --> 
+		<!--  ======================  Page to show all info about one share  --> 
 
 		<section id="share" data-role="dialog" data-theme="s">
 		    <header data-role="header" data-position="fixed" data-theme="s">
 		    	<a href="#top-page" data-icon="home" data-iconpos="notext"></a>
 		    	<h1>A Share!</h1>
-		<!--  ----------------- Template for a share detail info pop-up/dialog -->
 			</header>
 		    <div class="content" data-role="content">      
-		<script id="share-info-template" type="text/template">
+			<script id="share-info-template" type="text/template">
 					<img class="share-photo" src="{{photo}}"/>
 					<div class="share-amount">{{amount}}</div>
 					<div class="share-info">{{info}}</div>
 					<div class="share-date">{{date}}</div>
 					<div class="share-type share-type-{{type}}"></div>
-		</script>
- 		    	
+			</script>	
 		    </div>
 		</section>
 

@@ -22,7 +22,7 @@ $(function setupmobiscrollers(){
 	    mode: 'scroller'
 	 });    
 
-    var curnames = ['\'000 ￥','$ US', '€ EUR','zł PLZ', '$ CAD', 'RUB','...'];
+    var curnames = ['\'000 я┐е','$ US', 'тВм EUR','z┼В PLZ', '$ CAD', 'RUB','...'];
     var moneyselectwheels = [{}];
     var wheel = {};
     for (var j=0;j<7;j++) {
@@ -76,3 +76,4 @@ $("#share-type-tab ul li").live("click",function(){
     $("."+newSelection).removeClass("ui-screen-hidden");
     prevSelection = newSelection;
 });
+

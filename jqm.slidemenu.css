@@ -1,0 +1,17 @@
+.slidemenu {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	width: 0px;
+	height: 100%;
+	background-image: url(images/petals.jpeg); 
+	font-family: 'Rock Salt', cursive;
+	font-size: 11pt;
+	margin: 2px;
+	-webkit-box-shadow: 3px 0px 5px -2px #32394A;
+	box-shadow: 3px 0px 5px -2px #32394A;
+	z-index: 2147483647;
+	display: none;
+	overflow: auto;
+	-webkit-overflow-scrolling: touch;
+}
