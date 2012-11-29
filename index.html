@@ -52,13 +52,11 @@
 		<script src="ShareDialog.js"></script>
 		<script src="InfoPopupViews.js"></script>
 
-		<script src="js/jquery.animate-enhanced.min.js"></script>
-		<script src="js/jqm.globals.js"></script>
-		<link rel="stylesheet" href="jqm.slidemenu.css" />
-		<script src="js/jqm.slidemenu.js"></script>
-
-		<script src="js/iscroll.js"></script>
-	  	<script src="js/jquery.mobile.iscrollview.js"></script>
+		<!-- Slide menu block 
+			 From: https://github.com/tegansnyder/JQuery-Mobile-Slide-Menu
+		-->
+		<link rel="stylesheet" href="lib/jqm.slidemenu.css" />
+		<script src="lib/jqm.slidemenu.js"></script>
 		
     </head>
     
@@ -84,7 +82,7 @@
             	<h1>Share!</h1>
 				<a id="filter-button" href="#filter-selector" data-rel="popup" ></a>
 			</header>
-            <div class="content" data-role="content" data-iscroll>
+            <div class="content" data-role="content">
             	<div class="friend-list-container">
 	                <script id="friend-list-item-template" type="text/template">
 						<a class="friend-list-item" href="#friend?id={{id}}">
@@ -93,7 +91,7 @@
 						<ul id="friend-shares"/>
 						</a>
 					</script>
-					<script id="friend-list-item-template-share" type="text/template">
+					<script id="friend-list-item-template-share" type="text/template" onLoad="{testMy()}">
 						<a  href="#share?id={{id}}">
 							<img class="share-photo" src="{{photo}}"/>
 							<div class="share-amount">{{amount}}</div>

@@ -264,6 +264,7 @@ background: transparent;
 	width: 8em;
 	overflow: hidden;
 	margin: 0.2em 0.4em;
+	/*margin-left: 8em;*/
 
 	-webkit-border-radius: 4px;
 	border-radius: 4px;
